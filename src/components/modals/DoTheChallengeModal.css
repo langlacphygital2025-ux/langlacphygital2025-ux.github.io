@@ -1,0 +1,196 @@
+/* Styles for DoTheChallengeModal */
+.do-the-challenge-root .gameplay-sheet {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Challenge logo at top */
+.do-the-challenge-logo-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.do-the-challenge-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Video display section */
+.do-the-challenge-wrapper {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border-radius: 16px;
+  position: relative;
+}
+
+.do-the-challenge-video {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Hide fullscreen and menu buttons from video controls */
+.do-the-challenge-video::-webkit-media-controls-fullscreen-button {
+  display: none;
+}
+
+.do-the-challenge-video::-moz-media-controls-fullscreen-button {
+  display: none;
+}
+
+.do-the-challenge-video::-webkit-media-controls-panel {
+  --webkit-media-controls-fullscreen-button-display: none;
+}
+
+.do-the-challenge-video::-webkit-media-controls-overflow-menu-button {
+  display: none;
+}
+
+.do-the-challenge-video::-moz-media-controls-overflow-menu-button {
+  display: none;
+}
+
+/* Title */
+.do-the-challenge-title {
+  color: #ff7a00;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+/* Question text */
+.do-the-challenge-root .do-the-challenge-question {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #404040;
+  font-size: 16px;
+}
+
+.do-the-challenge-root .do-the-challenge-question b {
+  font-weight: 700;
+  font-family: "Fz Poppins", Arial, sans-serif;
+}
+
+/* Evaluation text */
+.do-the-challenge-evaluation-text {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #404040;
+  font-size: 14px;
+}
+
+/* Star rating */
+.do-the-challenge-stars {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.do-the-challenge-star {
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  color: transparent;
+  transition: all 150ms ease;
+  padding: 0;
+  outline: none;
+  box-shadow: none !important;
+  position: relative;
+  -webkit-text-stroke: 2px #F37327;
+}
+
+.do-the-challenge-star:hover:not(:disabled) {
+  transform: scale(1.15);
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.do-the-challenge-star.filled {
+  color: #F37327;
+  -webkit-text-stroke: 0px;
+}
+
+.do-the-challenge-star:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.do-the-challenge-star.submitted {
+  cursor: default;
+  transition: none;
+}
+
+/* Control buttons */
+.do-the-challenge-root .do-the-challenge-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.do-the-challenge-root .do-the-challenge-confirm {
+  padding: 10px 20px;
+  border-radius: 28px;
+  border: none;
+  background: #ffd24d;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.do-the-challenge-root .do-the-challenge-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+}
+
+.do-the-challenge-root .do-the-challenge-confirm.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .do-the-challenge-root .gameplay-sheet {
+    padding: 20px 16px;
+  }
+
+  .do-the-challenge-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .do-the-challenge-stars {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .do-the-challenge-star {
+    font-size: 40px;
+  }
+
+  .do-the-challenge-evaluation-text {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+}

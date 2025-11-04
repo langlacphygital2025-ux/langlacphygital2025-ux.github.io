@@ -110,10 +110,11 @@ export default function WatchVideoAndChooseRightAnswerModal({
               ref={videoRef}
               src={video}
               className="watch-video-choose-video"
-              controls
+              autoPlay
               onPlay={handleVideoPlay}
               onPause={handleVideoPause}
               onEnded={handleVideoEnd}
+              controlsList="nofullscreen"
             />
           </div>
         )}

@@ -12,6 +12,7 @@ import { getReadAndChooseQuestion } from "../components/modals/readAndChooseQues
 import { readAndChooseWithImageQuestions } from "../components/modals/readAndChooseWithImageQuestions";
 import { watchVideoAndChooseQuestions } from "../components/modals/watchVideoAndChooseQuestions";
 import { listenToSoundQuestions } from "../components/modals/listenToSoundQuestions";
+import { doChallengeQuestions } from "../components/modals/doChallengeQuestions";
 
 function HomeInner() {
   const { teamScores, currentTeam, answerQuestion, setCurrentTeam } = useGame();
@@ -84,6 +85,16 @@ function HomeInner() {
       return;
     }
 
+    // then check if this number corresponds to a DoTheChallengeModal question
+    const doQ = doChallengeQuestions[n];
+    if (doQ) {
+      setActiveModalKey("DoTheChallengeModal");
+      setActiveQuestionData(doQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
     // then check if this number corresponds to a ReadAndChooseAnswerWithImageModal question
     const imageQ = readAndChooseWithImageQuestions[n];
     if (imageQ) {
@@ -112,14 +123,21 @@ function HomeInner() {
     setQuestionOpen(true);
   }
 
-  function handleQuestionResult(result) {
+  function handleQuestionResult(result, extraData = {}) {
     // calculate totals based on current known scores so modal can display the updated value
     const prev = teamScores[currentTeam] || 0;
     let newTotal = prev;
     let added = 0;
+
     if (result === "success") {
-      added = 1;
-      newTotal = prev + 1;
+      // if extraData contains points (from DoTheChallengeModal), use those
+      if (extraData.points !== undefined) {
+        added = extraData.points;
+        newTotal = prev + added;
+      } else {
+        added = 1;
+        newTotal = prev + 1;
+      }
     } else if (result === "failure") {
       added = -3;
       newTotal = Math.max(0, prev - 3);
