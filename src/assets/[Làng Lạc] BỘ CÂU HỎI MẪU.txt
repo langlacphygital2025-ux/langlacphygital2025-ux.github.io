@@ -91,8 +91,8 @@ Chọn câu trả lời
 4. Gió trăng, Lai Châu
 
 
-4. Lào Cai (Lào Cai - Yên Bái)
-🤯 Thử Thách: Đọc đoạn văn dưới đây
+4. Lào Cai (Lào Cai - Yên Bái) [EnterTextAsAnswerModal]
+Đọc đoạn văn dưới đây
 _ào _ai  sở hữu Sa Pa – một trong những thị trấn du lịch nổi tiếng nhất Việt Nam, duy nhất lọt top 16 thị trấn đẹp nhất thế giới do tạp chí Time Out (Anh) bình chọn. 
 
 
@@ -223,9 +223,9 @@ Tính từ chỉ màu sắc có trong đoạn văn về mùa nhãn ở tỉnh H�
 4. Li ti 
 
 
-15. Ninh Bình (Hà Nam - Ninh Bình - Nam Định) 
+15. Ninh Bình (Hà Nam - Ninh Bình - Nam Định) [EnterTextAsAnswerModal]
 Tỉnh Ninh Bình có thành phố ____, nằm ở trung tâm tỉnh và là nơi nối liền đồng bằng sông Hồng với nhiều vùng khác của miền Bắc Việt Nam. 
-🤯 Thử Thách: Điền câu trả lời
+Điền câu trả lời
 Sắp xếp cụm từ sau để có tên chính xác của thành phố thuộc tỉnh Ninh Bình được nhắc đến trong đoạn văn trên: O H A Ư L ________
 Đáp án: HOA LƯ ✅
 
@@ -273,9 +273,9 @@ Hát Ru cho Bé - Cái Cò Mày Đi Ăn Đêm, Cái Cò Đi Đón Cơn Mưa (aud
 4. Hát Xẩm 
 
 
-21. TP. Đà Nẵng (Quảng Nam - Tp. Đà Nẵng)
+21. TP. Đà Nẵng (Quảng Nam - Tp. Đà Nẵng) [DoTheChallengeWithImageModal]
 (Thêm hình - Khu đền tháp Mỹ Sơn, Phố cổ Hội An, Đảo Cù Lao Chàm)
-🏃‍♀️ Thử Thách: Thử thách chụp ảnh cùng di sản văn hóa thế giới tại TP. Đà Nẵng
+Thử thách chụp ảnh cùng di sản văn hóa thế giới tại TP. Đà Nẵng
 Đội thực hiện thử thách sẽ đóng vai khách du lịch đến Quảng Nam ( Thuộc TP. Đà Nẵng). Đội còn lại đọc tên một địa điểm, các bạn tạo dáng mô phỏng địa điểm như sau:
 
 
@@ -335,8 +335,8 @@ Các bạn nghĩ đâu không phải là hình ảnh của Đà Lạt (Thuộc t
 (Thêm hình)
 
 
-27. Đồng Nai (Đồng Nai - Bình Phước)
-🤯 Thử Thách: Điền câu trả lời
+27. Đồng Nai (Đồng Nai - Bình Phước) [EnterTextAsAnswerModal]
+Điền câu trả lời
 Loại trái cây nào nổi tiếng của tỉnh Đồng Nai có tên gọi là hai chữ lặp lại bắt đầu bằng chữ C?
 Điền từ:________
 
@@ -408,7 +408,7 @@ Người dân ở chợ nổi Cái Răng thường dùng phương tiện gì đ�
 34. Cà Mau (Bạc Liêu - Cà Mau)
 
 
-🤯 Thử Thách: Điền câu trả lời
+🤯 Thử Thách: Điền câu trả lời [EnterTextAsAnswerModal]
 Ở Cà Mau có vườn quốc gia dự trữ sinh quyển của thế giới được UNESCO công nhận với tên gọi đọc ngược là Ha Minh Ụ. Tên gọi của vườn quốc gia đó là?
 
 

@@ -13,6 +13,7 @@ import { readAndChooseWithImageQuestions } from "../components/modals/readAndCho
 import { watchVideoAndChooseQuestions } from "../components/modals/watchVideoAndChooseQuestions";
 import { listenToSoundQuestions } from "../components/modals/listenToSoundQuestions";
 import { doChallengeQuestions } from "../components/modals/doChallengeQuestions";
+import { getEnterTextAsAnswerQuestion } from "../components/modals/enterTextAsAnswerQuestions";
 
 function HomeInner() {
   const { teamScores, currentTeam, answerQuestion, setCurrentTeam } = useGame();
@@ -90,6 +91,16 @@ function HomeInner() {
     if (doQ) {
       setActiveModalKey("DoTheChallengeModal");
       setActiveQuestionData(doQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // then check if this number corresponds to an EnterTextAsAnswerModal question
+    const textQ = getEnterTextAsAnswerQuestion(n);
+    if (textQ) {
+      setActiveModalKey("EnterTextAsAnswerModal");
+      setActiveQuestionData(textQ);
       setGameModalOpen(false);
       setQuestionOpen(true);
       return;
