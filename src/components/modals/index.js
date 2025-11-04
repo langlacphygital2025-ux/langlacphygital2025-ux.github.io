@@ -7,6 +7,7 @@ export { default as MemorizeInLimitedTimeAndChooseAnswerModal } from "./Memorize
 export { default as TypeInAnswerModal } from "./TypeInAnswerModal";
 export { default as DoTheChallengeModal } from "./DoTheChallengeModal";
 export { default as EnterTextAsAnswerModal } from "./EnterTextAsAnswerModal";
+export { default as ClassifyWordsModal } from "./ClassifyWordsModal";
 export { default as MatchPairsModal } from "./MatchPairsModal";
 export { default as SuccessModal } from "./SuccessModal";
 export { default as FailedModal } from "./FailedModal";

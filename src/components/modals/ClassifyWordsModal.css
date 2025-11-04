@@ -1,0 +1,199 @@
+/* Styles for ClassifyWordsModal */
+.classify-words-root .gameplay-sheet {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Challenge logo at top */
+.classify-words-logo-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.classify-words-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Prompt text */
+.classify-words-root .classify-words-prompt {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #404040;
+  white-space: pre-wrap;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Question text (passage) */
+.classify-words-root .classify-words-question {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom: 24px;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.classify-words-root .classify-words-question p {
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+  color: #404040;
+}
+
+.classify-words-root .classify-words-question p:last-child {
+  margin-bottom: 0;
+}
+
+.classify-words-root .classify-words-question u {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  color: #404040;
+}
+
+.classify-words-root .classify-words-question strong,
+.classify-words-root .classify-words-question b {
+  font-weight: 600;
+  font-family: "Fz Poppins", Arial, sans-serif;
+}
+
+/* Input pill containers */
+.classify-words-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.classify-words-input-pill {
+  width: 100%;
+  height: 48px;
+  background: #F2F2F7;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  box-shadow: none;
+  border: 3px solid transparent;
+  transition: all 150ms ease;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.classify-words-input-pill.focused {
+  border-color: #FFD456;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.classify-words-input-pill.submitted {
+  border-color: transparent;
+  background: #F2F2F7;
+}
+
+.classify-words-label {
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #F66B00;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.classify-words-input {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  color: #404040;
+  outline: none;
+  flex: 1;
+  min-width: 40px;
+}
+
+.classify-words-input::placeholder {
+  color: #8C8C8C;
+}
+
+.classify-words-input:disabled {
+  color: #999;
+}
+
+/* Control buttons */
+.classify-words-root .classify-words-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.classify-words-root .classify-words-confirm {
+  width: 200px;
+  height: 44px;
+  background: #ffd24d;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+  font-family: "Fz Poppins", Arial, sans-serif;
+}
+
+.classify-words-root .classify-words-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+  background-color: #ffca1a !important;
+  box-shadow: none !important;
+}
+
+.classify-words-root .classify-words-confirm.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .classify-words-root .gameplay-sheet {
+    padding: 20px 16px;
+  }
+
+  .classify-words-inputs {
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .classify-words-input-pill {
+    height: 44px;
+    padding: 0 14px;
+  }
+
+  .classify-words-label {
+    font-size: 12px;
+  }
+
+  .classify-words-input {
+    font-size: 14px;
+  }
+
+  .classify-words-root .classify-words-confirm {
+    width: 160px;
+    height: 40px;
+    font-size: 14px;
+  }
+}

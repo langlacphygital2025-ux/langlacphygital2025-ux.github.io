@@ -14,6 +14,7 @@ import { watchVideoAndChooseQuestions } from "../components/modals/watchVideoAnd
 import { listenToSoundQuestions } from "../components/modals/listenToSoundQuestions";
 import { doChallengeQuestions } from "../components/modals/doChallengeQuestions";
 import { getEnterTextAsAnswerQuestion } from "../components/modals/enterTextAsAnswerQuestions";
+import { getClassifyWordsQuestion } from "../components/modals/classifyWordsQuestions";
 
 function HomeInner() {
   const { teamScores, currentTeam, answerQuestion, setCurrentTeam } = useGame();
@@ -91,6 +92,16 @@ function HomeInner() {
     if (doQ) {
       setActiveModalKey("DoTheChallengeModal");
       setActiveQuestionData(doQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // then check if this number corresponds to a ClassifyWordsModal question
+    const classifyQ = getClassifyWordsQuestion(n);
+    if (classifyQ) {
+      setActiveModalKey("ClassifyWordsModal");
+      setActiveQuestionData(classifyQ);
       setGameModalOpen(false);
       setQuestionOpen(true);
       return;

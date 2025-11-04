@@ -52,8 +52,8 @@ Chọn câu trả lời
 4. Lợn cắp nách
 
 
-2. Cao Bằng
-🤯 Thử Thách: Xếp loại các từ được đánh dấu trong đoạn văn sau:
+2. Cao Bằng [ClassifyWordsModal]
+Xếp loại các từ được đánh dấu trong đoạn văn sau:
 Đến Cao Bằng, về các bản làng, nhất là dịp mùa xuân (1), ngày hội, ngày chợ phiên, du khách sẽ không khỏi ngỡ ngàng (2) và thích thú (3) khi được hòa vào vườn hoa (4) đầy màu sắc. Các trang phục (5) của người Cao Bằng phổ biến nhất là sắc chàm, tự dệt (6), tự nhuộm (7), nhưng đa sắc màu nhất lại là của người Dao, người Mông. 
 Nhập số:
 Tính từ: 
