@@ -1,0 +1,359 @@
+/* Styles for MatchPairsModal */
+.match-pairs-root {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  transform: none !important;
+  overflow: hidden;
+}
+
+.match-pairs-root .gameplay-sheet {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: none !important;
+  position: relative;
+}
+
+/* Challenge logo at top */
+.match-pairs-logo-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.match-pairs-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Prompt text */
+.match-pairs-root .match-pairs-prompt {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #404040;
+  white-space: pre-wrap;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Question text */
+.match-pairs-root .match-pairs-question {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom: 24px;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.match-pairs-root .match-pairs-question p {
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+  color: #404040;
+}
+
+.match-pairs-root .match-pairs-question p:last-child {
+  margin-bottom: 0;
+}
+
+.match-pairs-root .match-pairs-question strong,
+.match-pairs-root .match-pairs-question b {
+  font-weight: 600;
+  font-family: "Fz Poppins", Arial, sans-serif;
+}
+
+/* Match pairs grid container - Main 2-column layout */
+.match-pairs-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 24px;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  transform: none !important;
+}
+
+/* Left column - Images (3 rows) */
+.match-pairs-images-column {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.match-pairs-image-item {
+  width: 100%;
+  aspect-ratio: 1;
+  min-height: 120px;
+  max-height: 180px;
+  background: #F2F2F7;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.match-pairs-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Right column - Draggable answers (3 rows) */
+.match-pairs-answers-column {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  align-content: stretch;
+  align-items: center;
+}
+
+.match-pairs-pill {
+  width: 100%;
+  min-height: 60px;
+  height: auto;
+  background: #FFFAF6;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border: 3px solid #FFD456;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 200ms ease;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  flex-shrink: 0;
+  touch-action: none;
+  margin: auto 0;
+}
+
+.match-pairs-pill:hover:not(.submitted) {
+  border-color: #F37327;
+  box-shadow: 0 6px 16px rgba(243, 115, 39, 0.15);
+  transform: translateY(-2px);
+}
+
+.match-pairs-pill:active {
+  cursor: grabbing;
+}
+
+.match-pairs-pill.submitted {
+  background: #f5f5f5;
+  border-color: #e0e0e0;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Drag overlay specific styles */
+.match-pairs-pill.dragging-overlay {
+  background: #FFF8E7;
+  border-color: #F37327;
+  box-shadow: 0 8px 20px rgba(243, 115, 39, 0.25);
+  z-index: 1000;
+  pointer-events: none;
+  transform: rotate(3deg) scale(1.05);
+}
+
+.match-pairs-answer {
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #404040;
+  text-align: center;
+  flex: 1;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.match-pairs-drag-icon {
+  font-size: 20px;
+  color: #F66B00;
+  opacity: 0.7;
+  flex-shrink: 0;
+  margin-left: 12px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* Control buttons */
+.match-pairs-root .match-pairs-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.match-pairs-root .match-pairs-confirm {
+  width: 200px;
+  height: 44px;
+  background: #ffd24d;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  padding: 0;
+  font-size: 16px;
+}
+
+.match-pairs-root .match-pairs-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+  background-color: #ffca1a !important;
+  box-shadow: none !important;
+}
+
+.match-pairs-root .match-pairs-confirm.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.match-pairs-root .match-pairs-confirm:active:not(.disabled) {
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .match-pairs-root .gameplay-sheet {
+    padding: 16px 12px;
+  }
+
+  .match-pairs-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .match-pairs-images-column {
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .match-pairs-answers-column {
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+
+  .match-pairs-image-item {
+    min-height: 100px;
+    max-height: 120px;
+    aspect-ratio: 1;
+  }
+
+  .match-pairs-pill {
+    min-height: 54px;
+    padding: 12px 16px;
+    border-radius: 28px;
+    /* Improve touch targets on mobile */
+    touch-action: manipulation;
+  }
+
+  .match-pairs-pill.dragging-overlay {
+    /* Better visibility on mobile */
+    box-shadow: 0 10px 25px rgba(243, 115, 39, 0.3);
+  }
+
+  .match-pairs-answer {
+    font-size: 13px;
+  }
+
+  .match-pairs-drag-icon {
+    font-size: 18px;
+    margin-left: 8px;
+  }
+
+  .match-pairs-root .match-pairs-confirm {
+    width: 160px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .match-pairs-root .gameplay-sheet {
+    padding: 12px 8px;
+  }
+
+  .match-pairs-grid-container {
+    gap: 12px;
+  }
+
+  .match-pairs-images-column {
+    gap: 10px;
+  }
+
+  .match-pairs-answers-column {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .match-pairs-image-item {
+    min-height: 80px;
+    max-height: 100px;
+  }
+
+  .match-pairs-pill {
+    min-height: 50px;
+    padding: 10px 12px;
+  }
+
+  .match-pairs-answer {
+    font-size: 12px;
+  }
+
+  .match-pairs-drag-icon {
+    font-size: 16px;
+    margin-left: 6px;
+  }
+
+  .match-pairs-root .match-pairs-confirm {
+    width: 140px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .match-pairs-root .match-pairs-prompt {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .match-pairs-root .match-pairs-question {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+}

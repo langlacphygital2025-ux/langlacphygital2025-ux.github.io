@@ -52,7 +52,7 @@ Chọn câu trả lời
 4. Lợn cắp nách
 
 
-2. Cao Bằng [ClassifyWordsModal]
+ck2. Cao Bằng [ClassifyWordsModal]
 Xếp loại các từ được đánh dấu trong đoạn văn sau:
 Đến Cao Bằng, về các bản làng, nhất là dịp mùa xuân (1), ngày hội, ngày chợ phiên, du khách sẽ không khỏi ngỡ ngàng (2) và thích thú (3) khi được hòa vào vườn hoa (4) đầy màu sắc. Các trang phục (5) của người Cao Bằng phổ biến nhất là sắc chàm, tự dệt (6), tự nhuộm (7), nhưng đa sắc màu nhất lại là của người Dao, người Mông. 
 Nhập số:
@@ -100,16 +100,16 @@ _ào _ai  sở hữu Sa Pa – một trong những thị trấn du lịch nổi 
 (Đáp án: Lào Cai)
 
 
-5. Thái Nguyên (Bắc Kạn - Thái Nguyên)
-🤯 Thử Thách: Nối hình và tên gọi của các đặc sản tỉnh Thái Nguyên
+5. Thái Nguyên (Bắc Kạn - Thái Nguyên) [MatchPairsModal]
+Nối hình và tên gọi của các đặc sản tỉnh Thái Nguyên
 Bánh Chưng- Bờ Đậu
 Trà Móc Câu- Thái Nguyên
 Nem chua -Đại Từ
 
 
-6. Điện Biên
+6. Điện Biên [MatchPairsModal]
 Vào mùa xuân, nhiều du khách chọn đến Điện Biên để du lịch, khi thời tiết dễ chịu, không mưa, nhiều loài hoa nở rộ tô điểm cảnh quan.
-🤯 Thử Thách: Nối tên gọi và màu sắc của các loài hoa cảnh quan tại Điện Biên
+Nối tên gọi và màu sắc của các loài hoa cảnh quan tại Điện Biên
 Hoa đào - màu hồng
 Hoa ban - màu trắng
 Hoa phượng - màu đỏ

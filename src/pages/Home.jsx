@@ -15,6 +15,7 @@ import { listenToSoundQuestions } from "../components/modals/listenToSoundQuesti
 import { doChallengeQuestions } from "../components/modals/doChallengeQuestions";
 import { getEnterTextAsAnswerQuestion } from "../components/modals/enterTextAsAnswerQuestions";
 import { getClassifyWordsQuestion } from "../components/modals/classifyWordsQuestions";
+import { getMatchPairsQuestion } from "../components/modals/matchPairsQuestions";
 
 function HomeInner() {
   const { teamScores, currentTeam, answerQuestion, setCurrentTeam } = useGame();
@@ -102,6 +103,16 @@ function HomeInner() {
     if (classifyQ) {
       setActiveModalKey("ClassifyWordsModal");
       setActiveQuestionData(classifyQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // then check if this number corresponds to a MatchPairsModal question
+    const matchQ = getMatchPairsQuestion(n);
+    if (matchQ) {
+      setActiveModalKey("MatchPairsModal");
+      setActiveQuestionData(matchQ);
       setGameModalOpen(false);
       setQuestionOpen(true);
       return;
