@@ -1,13 +1,24 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+import compression from "vite-plugin-compression";
 
 export default defineConfig({
-  base: "./",
+  base: "/",
   plugins: [
     react(),
+    compression({
+      verbose: true,
+      disable: false,
+      threshold: 10240,
+      algorithm: "gzip",
+      ext: ".gz",
+    }),
     VitePWA({
       registerType: "autoUpdate",
+      devOptions: {
+        enabled: false,
+      },
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
       manifest: {
         name: "Bong Capstone App",
@@ -17,6 +28,8 @@ export default defineConfig({
         background_color: "#ffffff",
         display: "standalone",
         orientation: "portrait",
+        start_url: "/",
+        scope: "/",
         icons: [
           {
             src: "pwa-192x192.png",
@@ -32,11 +45,11 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Increase the default maximum size for assets that will be precached by
-        // Workbox. The default is 2 MiB which caused the build error for a
-        // ~2.52 MB image. Set to 5 MiB to allow larger assets to be precached.
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
+        maximumFileSizeToCacheInBytes: 50 * 1024 * 1024,
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2,mp3}"],
+        globIgnores: ["**/*.mp4"],
+        navigateFallback: "index.html",
+        navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -49,6 +62,17 @@ export default defineConfig({
               },
               cacheableResponse: {
                 statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern: /\.mp4$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "video-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 7,
               },
             },
           },

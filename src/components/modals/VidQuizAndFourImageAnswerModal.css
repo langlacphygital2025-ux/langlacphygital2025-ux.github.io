@@ -1,0 +1,321 @@
+/* Styles for VidQuizAndFourImageAnswerModal */
+.vid-quiz-four-image-root .gameplay-sheet {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+}
+
+/* Challenge logo at top */
+.vid-quiz-four-image-logo-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.vid-quiz-four-image-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Video display section */
+.vid-quiz-four-image-wrapper {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border-radius: 16px;
+  position: relative;
+}
+
+.vid-quiz-four-image-video {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Hide fullscreen and menu buttons from video controls */
+.vid-quiz-four-image-video::-webkit-media-controls-fullscreen-button {
+  display: none;
+}
+
+.vid-quiz-four-image-video::-moz-media-controls-fullscreen-button {
+  display: none;
+}
+
+.vid-quiz-four-image-video::-webkit-media-controls-panel {
+  --webkit-media-controls-fullscreen-button-display: none;
+}
+
+/* Hide the menu button (three dots) */
+.vid-quiz-four-image-video::-webkit-media-controls-overflow-menu-button {
+  display: none;
+}
+
+.vid-quiz-four-image-video::-moz-media-controls-overflow-menu-button {
+  display: none;
+}
+
+/* Question text */
+.vid-quiz-four-image-root .vid-quiz-four-image-question {
+  text-align: center;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #404040;
+  font-size: 16px;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-question b {
+  font-weight: 700;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+}
+
+/* 2x2 Grid layout for answer choices */
+.vid-quiz-four-image-root .vid-quiz-four-image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+/* Individual choice button with image and text */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  border-radius: 16px;
+  transition: transform 80ms ease, filter 150ms ease;
+  overflow: hidden;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice:disabled {
+  cursor: not-allowed;
+}
+
+/* Image container within each choice */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  transition: border-color 150ms ease;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Text label below image */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice-text {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #F2F2F7;
+  color: #8C8C8C;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  transition: background 150ms ease, color 150ms ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Hover state */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice:hover:not(.video-playing):not(:disabled) {
+  transform: translateY(-4px);
+}
+/* 
+.vid-quiz-four-image-root .vid-quiz-four-image-choice:hover:not(.video-playing):not(:disabled) .vid-quiz-four-image-choice-image {
+  border-color: #ff7a00;
+} */
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice:hover:not(.video-playing):not(:disabled) .vid-quiz-four-image-choice-text {
+  background: #ff7a00;
+  color: white;
+}
+
+/* Selected state
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.selected .vid-quiz-four-image-choice-image {
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.2);
+} */
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.selected .vid-quiz-four-image-choice-text {
+  background: #ff7a00;
+  color: white;
+}
+
+/* Correct answer state */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.correct .vid-quiz-four-image-choice-image {
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.2);
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.correct .vid-quiz-four-image-choice-text {
+  background: #ff7a00;
+  color: white;
+}
+
+/* Wrong answer state */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.wrong .vid-quiz-four-image-choice-image {
+  border-color: #e04a3f;
+  box-shadow: 0 0 0 3px rgba(224, 74, 63, 0.2);
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.wrong .vid-quiz-four-image-choice-text {
+  background: #e04a3f;
+  color: white;
+}
+
+/* Disabled state (while video is playing) */
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.video-playing {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.video-playing .vid-quiz-four-image-choice-image {
+  border-color: #d3d3d3;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-choice.video-playing .vid-quiz-four-image-choice-text {
+  background: #d3d3d3;
+  color: #999;
+}
+
+/* Control buttons */
+.vid-quiz-four-image-root .vid-quiz-four-image-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-confirm {
+  padding: 10px 20px;
+  border-radius: 28px;
+  border: none;
+  background: #ffd24d;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-size: 16px;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+}
+
+.vid-quiz-four-image-root .vid-quiz-four-image-confirm.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments for tablet */
+@media (max-width: 768px) {
+  .vid-quiz-four-image-root .gameplay-sheet {
+    padding: 24px 20px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-grid {
+    gap: 14px;
+    max-width: 100%;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-choice-text {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 480px) {
+  .vid-quiz-four-image-root .gameplay-sheet {
+    padding: 20px 16px;
+  }
+
+  .vid-quiz-four-image-logo {
+    width: 80px;
+  }
+
+  .vid-quiz-four-image-wrapper {
+    aspect-ratio: 16 / 9;
+    margin-bottom: 16px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-grid {
+    gap: 12px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-question {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-choice-text {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-confirm {
+    padding: 9px 18px;
+    font-size: 14px;
+  }
+}
+
+/* Responsive adjustments for small phones */
+@media (max-width: 320px) {
+  .vid-quiz-four-image-root .gameplay-sheet {
+    padding: 16px 12px;
+  }
+
+  .vid-quiz-four-image-wrapper {
+    aspect-ratio: 16 / 9;
+    margin-bottom: 12px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-grid {
+    gap: 10px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-question {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .vid-quiz-four-image-root .vid-quiz-four-image-choice-text {
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+}

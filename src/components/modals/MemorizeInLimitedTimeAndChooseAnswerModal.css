@@ -1,0 +1,521 @@
+/* MemorizeInLimitedTime Modal Styles */
+.memorize-limited-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.memorize-limited-root .gameplay-sheet {
+  background: white;
+  border-radius: 24px;
+  padding: 28px 24px;
+  width: 90%;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: 'Fz Poppins', sans-serif;
+}
+
+/* Challenge logo at top */
+.memorize-limited-logo-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.memorize-limited-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Mystery Stage */
+.memorize-limited-mystery-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0;
+}
+
+.memorize-limited-prompt {
+  color: #000000;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  padding: 0 16px;
+  text-align: center;
+  max-width: 100%;
+}
+
+.memorize-limited-mystery-frame {
+  background: #FFD966;
+  border-radius: 12px;
+  width: 100%;
+  /* max-width: 280px; */
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.memorize-limited-question-mark {
+  color: white;
+  font-size: 72px;
+  font-weight: 700;
+  font-family: 'Fz Poppins', sans-serif;
+  line-height: 1;
+}
+
+.memorize-limited-start-btn {
+  background: #FFD966;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 18px;
+  padding: 10px 50px;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.memorize-limited-start-btn:hover {
+  background: #FFCA28;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(255, 217, 102, 0.35);
+}
+
+/* Timer */
+.memorize-limited-timer {
+  margin: 20px 0;
+}
+
+.memorize-limited-timer-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFD966;
+  border: 4px solid #FFD966;
+}
+
+.memorize-limited-timer-number {
+  color: #FFD966;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Memorization Content */
+.memorize-limited-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.memorize-limited-quiz-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memorize-limited-content-image {
+  width: 260px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.memorize-limited-display-name {
+  background: #FF8C42;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.3);
+  border: 2px solid white;
+  text-transform: uppercase;
+}
+
+.memorize-limited-dragdrop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 0;
+}
+
+/* Main person display (single large image) */
+.memorize-limited-main-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.memorize-limited-main-person-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.memorize-limited-main-person-name {
+  background: #FF8C42;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.3);
+  border: 2px solid white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.memorize-limited-person-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.memorize-limited-person-image {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  border: 3px solid white;
+}
+
+.memorize-limited-person-name {
+  background: #FF8C42;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 120px;
+  word-wrap: break-word;
+  box-shadow: 0 2px 6px rgba(255, 140, 66, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Quiz Stage */
+.memorize-limited-question {
+  color: #404040;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4285714285714286em;
+  margin: 0 0 28px 0;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.memorize-limited-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 24px;
+  padding: 0 8px;
+  align-items: center;
+}
+
+.memorize-limited-choice {
+  background: #F2F2F7;
+  color: #8C8C8C;
+  border: none;
+  border-radius: 159.4px;
+  padding: 0px 24px;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: 313px;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memorize-limited-choice:hover:not(.submitted) {
+  background: #E5E5EA;
+  transform: translateY(-1px);
+}
+
+.memorize-limited-choice.selected {
+  background: #F37327;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.memorize-limited-choice.submitted {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Drag-drop grid */
+.memorize-limited-grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 20px;
+  padding: 0 8px;
+  justify-content: center;
+  align-items: start;
+}
+
+.memorize-limited-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.memorize-limited-images-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.memorize-limited-image-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 116px;
+  flex-shrink: 0;
+}
+
+.memorize-limited-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.memorize-limited-answers-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.memorize-limited-pill {
+  background: #FFFAF6;
+  border: 4px solid #F37327;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: all 0.2s ease;
+  width: 152px;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  box-shadow: none;
+  flex-shrink: 0;
+  margin: 34px 0;
+}
+
+.memorize-limited-pill:hover:not(.submitted) {
+  background: #FFF5E6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255, 212, 86, 0.2);
+}
+
+.memorize-limited-pill:active {
+  cursor: grabbing;
+}
+
+.memorize-limited-pill.submitted {
+  cursor: not-allowed;
+  background: #FFFAF6;
+  border-color: #F37327;
+}
+
+.memorize-limited-pill.dragging-overlay {
+  background: #FFFAF6;
+  color: #F37327;
+  border-color: #F37327;
+  box-shadow: 0 4px 16px rgba(243, 115, 39, 0.4);
+  transform: rotate(2deg);
+}
+
+.memorize-limited-answer {
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #F37327;
+  line-height: 1.5em;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.memorize-limited-drag-icon {
+  display: none;
+}
+
+/* Controls */
+.memorize-limited-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+  max-width: 167px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.memorize-limited-confirm {
+  background: #FFD456;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 159.4px;
+  padding: 0;
+  font-family: 'Fz Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.memorize-limited-confirm:hover:not(.disabled) {
+  background: #FFC933;
+  transform: translateY(-1px);
+  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+.memorize-limited-confirm.disabled {
+  background: #E0E0E0;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .memorize-limited-root .gameplay-sheet {
+    width: 95%;
+    padding: 20px;
+    margin: 16px;
+    max-width: 360px;
+  }
+
+  .memorize-limited-mystery-frame {
+    width: 100%;
+    height: 140px;
+  }
+
+  .memorize-limited-question-mark {
+    font-size: 60px;
+  }
+
+  .memorize-limited-content-image {
+    width: 220px;
+    height: 140px;
+  }
+
+  .memorize-limited-main-person-image {
+    width: 100%;
+    height: 140px;
+  }
+
+  .memorize-limited-grid-container {
+    max-width: 320px;
+  }
+
+  .memorize-limited-row {
+    gap: 12px;
+  }
+
+  .memorize-limited-image-item {
+    width: 140px;
+    height: 80px;
+  }
+
+  .memorize-limited-pill {
+    width: 130px;
+    height: 44px;
+  }
+
+  .memorize-limited-person-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .memorize-limited-choices {
+    max-width: 300px;
+  }
+
+  .memorize-limited-choice {
+    width: 100%;
+    max-width: 280px;
+    font-size: 16px;
+  }
+}

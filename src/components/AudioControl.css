@@ -1,0 +1,50 @@
+.audio-control-button {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 64px;
+  height: 64px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.audio-control-button:hover {
+  transform: scale(1.1);
+}
+
+.audio-control-button:active {
+  transform: scale(0.95);
+}
+
+.audio-control-button:focus {
+  outline-offset: 2px;
+}
+
+.audio-control-icon {
+  width: 30.72px;
+  height: 30.72px;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+  .audio-control-button {
+    top: 16px;
+    left: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .audio-control-icon {
+    width: 26.88px;
+    height: 26.88px;
+  }
+}

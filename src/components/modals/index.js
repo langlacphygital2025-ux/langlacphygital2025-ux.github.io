@@ -2,6 +2,7 @@ export { default as ReadAndChooseModal } from "./ReadAndChooseModal";
 export { default as ReadAndChooseAnswerWithImageModal } from "./ReadAndChooseAnswerWithImageModal";
 export { default as PickRightAnswerWithPicturesModal } from "./PickRightAnswerWithPicturesModal";
 export { default as WatchVideoAndChooseRightAnswerModal } from "./WatchVideoAndChooseRightAnswerModal";
+export { default as VidQuizAndFourImageAnswerModal } from "./VidQuizAndFourImageAnswerModal";
 export { default as ListenToSoundPickRightAnswerModal } from "./ListenToSoundPickRightAnswerModal";
 export { default as MemorizeInLimitedTimeAndChooseAnswerModal } from "./MemorizeInLimitedTimeAndChooseAnswerModal";
 export { default as TypeInAnswerModal } from "./TypeInAnswerModal";

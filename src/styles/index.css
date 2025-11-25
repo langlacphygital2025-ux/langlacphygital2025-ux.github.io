@@ -84,13 +84,12 @@ button {
   border-radius: var(--border-radius-md);
   background-color: var(--primary-color);
   color: white;
-  box-shadow: var(--shadow);
 }
 
 button:hover:not(:disabled) {
-  background-color: var(--primary-hover);
+  /* background-color: var(--primary-hover); */
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
 }
 
 button:active:not(:disabled) {

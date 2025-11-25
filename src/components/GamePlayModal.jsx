@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./GamePlayModal.css";
 import leafHat from "../assets/leaf-hat.png";
 
-function GamePlayModal({ isOpen, onClose, currentTeamName, onSubmit }) {
+function GamePlayModal({ isOpen, onClose, currentTeamName, onSubmit, onSkip }) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
 
@@ -15,6 +15,17 @@ function GamePlayModal({ isOpen, onClose, currentTeamName, onSubmit }) {
     const numeric = digitsMatch ? digitsMatch[0] : normalized;
     if (onSubmit) onSubmit(numeric);
     // do not call onClose here; parent will manage modal lifecycle after handling submit
+  };
+
+  const handleSkip = () => {
+    // Reset input for next team
+    setValue("");
+    // Call onSkip if provided, otherwise fall back to onClose
+    if (onSkip) {
+      onSkip();
+    } else if (onClose) {
+      onClose();
+    }
   };
 
   return (
@@ -41,12 +52,7 @@ function GamePlayModal({ isOpen, onClose, currentTeamName, onSubmit }) {
           <img src={leafHat} className="gameplay-leaf" alt="leaf hat" />
           <span>Nón lá hi vọng</span>
         </button>
-        <button
-          className="gameplay-skip"
-          onClick={() => {
-            if (onClose) onClose();
-          }}
-        >
+        <button className="gameplay-skip" onClick={handleSkip}>
           Bỏ qua
         </button>
       </div>

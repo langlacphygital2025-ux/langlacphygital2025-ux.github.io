@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./Home.css";
 import backgroundPattern from "../assets/background-pattern.png";
 import radialBlur from "../assets/radial-blur.png";
@@ -8,17 +8,34 @@ import BottomSheet from "../components/BottomSheet";
 import GamePlayModal from "../components/GamePlayModal";
 import { GameProvider, useGame } from "../components/GameProvider";
 import * as Modals from "../components/modals";
+import { useChatbot } from "../context/ChatbotContext";
+import { useVideoTutorial } from "../context/VideoTutorialContext";
 import { getReadAndChooseQuestion } from "../components/modals/readAndChooseQuestions";
 import { readAndChooseWithImageQuestions } from "../components/modals/readAndChooseWithImageQuestions";
 import { watchVideoAndChooseQuestions } from "../components/modals/watchVideoAndChooseQuestions";
+import { vidQuizAndFourImageQuestions } from "../components/modals/vidQuizAndFourImageQuestions";
 import { listenToSoundQuestions } from "../components/modals/listenToSoundQuestions";
 import { doChallengeQuestions } from "../components/modals/doChallengeQuestions";
 import { getEnterTextAsAnswerQuestion } from "../components/modals/enterTextAsAnswerQuestions";
 import { getClassifyWordsQuestion } from "../components/modals/classifyWordsQuestions";
 import { getMatchPairsQuestion } from "../components/modals/matchPairsQuestions";
+import { getMemorizeInLimitedTimeQuestion } from "../components/modals/memorizeInLimitedTimeQuestions";
 
 function HomeInner() {
-  const { teamScores, currentTeam, answerQuestion, setCurrentTeam } = useGame();
+  const {
+    teamScores,
+    currentTeam,
+    answerQuestion,
+    setCurrentTeam,
+    switchTurn,
+  } = useGame();
+  const {
+    transitionToChatbotState,
+    resetIdleTimer,
+    startAwaitingInput,
+    CHATBOT_STATES,
+  } = useChatbot();
+  const { videoFinished } = useVideoTutorial();
 
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [gameModalOpen, setGameModalOpen] = useState(false);
@@ -49,6 +66,13 @@ function HomeInner() {
     "MatchPairsModal",
   ];
 
+  // Show intro message after video finishes
+  useEffect(() => {
+    if (videoFinished) {
+      transitionToChatbotState(CHATBOT_STATES.INTRO);
+    }
+  }, [videoFinished, transitionToChatbotState, CHATBOT_STATES]);
+
   const handleStartClick = () => {
     setBottomSheetOpen(true);
   };
@@ -59,13 +83,26 @@ function HomeInner() {
     // sync provider current team so turns are tracked centrally
     if (setCurrentTeam) setCurrentTeam(currentTeam);
     setGameModalOpen(true);
+    // Transition to TURN_START state when game modal opens
+    transitionToChatbotState(CHATBOT_STATES.TURN_START);
+    startAwaitingInput();
   };
 
   const handleCloseGameModal = () => {
     setGameModalOpen(false);
   };
 
+  const handleSkip = () => {
+    // Switch to next team without closing the modal
+    switchTurn();
+    transitionToChatbotState(CHATBOT_STATES.TURN_START);
+    startAwaitingInput();
+  };
+
   function handleSubmitNumber(val) {
+    // Transition to CHALLENGE_SHOWN state when question is revealed
+    transitionToChatbotState(CHATBOT_STATES.CHALLENGE_SHOWN);
+    resetIdleTimer();
     const n = parseInt(val, 10);
 
     // first check if this number corresponds to a WatchVideoAndChooseRightAnswerModal question
@@ -73,6 +110,16 @@ function HomeInner() {
     if (videoQ) {
       setActiveModalKey("WatchVideoAndChooseRightAnswerModal");
       setActiveQuestionData(videoQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // check if this number corresponds to a VidQuizAndFourImageAnswerModal question
+    const vidQuizQ = vidQuizAndFourImageQuestions.find((q) => q.id === n);
+    if (vidQuizQ) {
+      setActiveModalKey("VidQuizAndFourImageAnswerModal");
+      setActiveQuestionData(vidQuizQ);
       setGameModalOpen(false);
       setQuestionOpen(true);
       return;
@@ -103,6 +150,16 @@ function HomeInner() {
     if (classifyQ) {
       setActiveModalKey("ClassifyWordsModal");
       setActiveQuestionData(classifyQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // then check if this number corresponds to a MemorizeInLimitedTimeAndChooseAnswerModal question
+    const memorizeQ = getMemorizeInLimitedTimeQuestion(n);
+    if (memorizeQ) {
+      setActiveModalKey("MemorizeInLimitedTimeAndChooseAnswerModal");
+      setActiveQuestionData(memorizeQ);
       setGameModalOpen(false);
       setQuestionOpen(true);
       return;
@@ -171,10 +228,13 @@ function HomeInner() {
         added = 1;
         newTotal = prev + 1;
       }
+      transitionToChatbotState(CHATBOT_STATES.SUCCESS);
     } else if (result === "failure") {
       added = -3;
       newTotal = Math.max(0, prev - 3);
+      transitionToChatbotState(CHATBOT_STATES.FAILURE);
     }
+    resetIdleTimer();
 
     // update central state
     answerQuestion(result);
@@ -187,6 +247,17 @@ function HomeInner() {
   }
 
   const ActiveModal = activeModalKey ? Modals[activeModalKey] : null;
+
+  const handleSuccessClose = useCallback(() => {
+    setSuccessOpen(false);
+    // reopen gameplay modal for next team
+    setTimeout(() => setGameModalOpen(true), 320);
+  }, []);
+
+  const handleFailureClose = useCallback(() => {
+    setFailureOpen(false);
+    setTimeout(() => setGameModalOpen(true), 320);
+  }, []);
 
   return (
     <div
@@ -251,6 +322,7 @@ function HomeInner() {
         onClose={handleCloseGameModal}
         currentTeamName={currentTeamState.teamNames?.[currentTeam]}
         onSubmit={handleSubmitNumber}
+        onSkip={handleSkip}
       />
 
       {ActiveModal && (
@@ -264,11 +336,7 @@ function HomeInner() {
 
       <Modals.SuccessModal
         isOpen={successOpen}
-        onClose={() => {
-          setSuccessOpen(false);
-          // reopen gameplay modal for next team
-          setTimeout(() => setGameModalOpen(true), 320);
-        }}
+        onClose={handleSuccessClose}
         teamName={currentTeamState.teamNames?.[currentTeam]}
         addedPoints={resultInfo.added > 0 ? resultInfo.added : 0}
         totalPoints={resultInfo.total}
@@ -276,10 +344,7 @@ function HomeInner() {
 
       <Modals.FailedModal
         isOpen={failureOpen}
-        onClose={() => {
-          setFailureOpen(false);
-          setTimeout(() => setGameModalOpen(true), 320);
-        }}
+        onClose={handleFailureClose}
         teamName={currentTeamState.teamNames?.[currentTeam]}
         totalPoints={resultInfo.total}
       />
