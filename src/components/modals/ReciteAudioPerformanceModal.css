@@ -1,0 +1,227 @@
+/* Styles for ReciteAudioPerformanceModal */
+.recite-audio-performance-root .gameplay-sheet {
+  max-width: 393px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 40px 40px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Header with icon and title */
+.recite-audio-logo-container {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.recite-audio-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+.recite-audio-icon {
+  width: 43px;
+  height: 43px;
+}
+
+.recite-audio-challenge-title {
+  color: #F37327;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  margin: 0;
+  padding: 0;
+}
+
+/* Instructions */
+.recite-audio-instructions {
+  text-align: center;
+  color: #404040;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  width: 100%;
+  max-width: 333px;
+}
+
+/* Audio player wrapper */
+.recite-audio-player-wrapper {
+  width: 100%;
+  max-width: 333px;
+  display: flex;
+  justify-content: center;
+}
+
+.recite-audio-player-wrapper .custom-audio-player {
+  width: 100%;
+}
+
+/* Lyrics container */
+.recite-audio-lyrics-container {
+  width: 100%;
+  max-width: 333px;
+  display: flex;
+  justify-content: center;
+}
+
+.recite-audio-lyrics {
+  color: #404040;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* Explanation */
+.recite-audio-explanation {
+  color: #404040;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  max-width: 333px;
+}
+
+/* Evaluation label */
+.recite-audio-evaluation-label {
+  text-align: center;
+  color: #404040;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Star rating system */
+.recite-audio-stars {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 5px 20px;
+  width: 274px;
+}
+
+.recite-audio-star {
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  color: transparent;
+  transition: all 150ms ease;
+  padding: 0;
+  outline: none;
+  box-shadow: none !important;
+  position: relative;
+  -webkit-text-stroke: 2px #f37327;
+  line-height: 1;
+}
+
+.recite-audio-star:hover:not(:disabled) {
+  transform: scale(1.15);
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.recite-audio-star.filled {
+  color: #f37327;
+  -webkit-text-stroke: 0px;
+}
+
+.recite-audio-star:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.recite-audio-star.submitted {
+  cursor: default;
+  transition: none;
+}
+
+/* Control buttons */
+.recite-audio-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.recite-audio-confirm {
+  padding: 8px 40px;
+  border-radius: 159px;
+  border: none;
+  background: #FFD456;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 150ms ease;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.recite-audio-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+}
+
+.recite-audio-confirm.disabled {
+  background: #cccccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Waiting message */
+.recite-audio-waiting {
+  text-align: center;
+  color: #8C8C8C;
+  font-family: 'Fz Poppins', Arial, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .recite-audio-performance-root .gameplay-sheet {
+    gap: 24px;
+    padding: 20px 16px;
+  }
+
+  .recite-audio-stars {
+    gap: 24px;
+  }
+
+  .recite-audio-star {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .recite-audio-performance-root .gameplay-sheet {
+    gap: 16px;
+    padding: 16px 12px;
+  }
+
+  .recite-audio-stars {
+    gap: 16px;
+  }
+
+  .recite-audio-star {
+    font-size: 36px;
+  }
+}

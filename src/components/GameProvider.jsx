@@ -5,6 +5,7 @@ const GameContext = createContext(null);
 export function GameProvider({ children }) {
   const [teamScores, setTeamScores] = useState({ team1: 0, team2: 0 });
   const [currentTeam, setCurrentTeam] = useState("team1");
+  const [answeredQuestions, setAnsweredQuestions] = useState({});
 
   const clamp = (n) => Math.max(0, n);
 
@@ -39,6 +40,17 @@ export function GameProvider({ children }) {
     });
   }
 
+  function markQuestionAnswered(questionId, result) {
+    setAnsweredQuestions((prev) => ({
+      ...prev,
+      [questionId]: result,
+    }));
+  }
+
+  function isQuestionAnswered(questionId) {
+    return answeredQuestions.hasOwnProperty(questionId);
+  }
+
   function setScore(team, value) {
     setTeamScores((prev) => ({ ...prev, [team]: clamp(value) }));
   }
@@ -46,6 +58,7 @@ export function GameProvider({ children }) {
   function reset() {
     setTeamScores({ team1: 0, team2: 0 });
     setCurrentTeam("team1");
+    setAnsweredQuestions({});
   }
 
   return (
@@ -58,6 +71,9 @@ export function GameProvider({ children }) {
         setScore,
         reset,
         setCurrentTeam,
+        answeredQuestions,
+        markQuestionAnswered,
+        isQuestionAnswered,
       }}
     >
       {children}

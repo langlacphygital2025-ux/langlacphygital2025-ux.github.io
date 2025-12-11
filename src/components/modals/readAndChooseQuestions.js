@@ -2,6 +2,16 @@
 // shape: { id, title?, prompt?, question, choices: [], correctIndex }
 
 const questions = {
+  7: {
+    id: 7,
+    title: "Lạng Sơn",
+    prompt:
+      "Lạn Sơn nằm ở cửa ngõ phía Bắc Tổ quốc, là một địa phương tiêu biểu thuộc vùng văn hóa Đông Bắc Việt Nam, nơi sở hữu kho tàng văn hóa đa dạng, giàu bản sắc, chứa đựng nhiều nét độc đáo.",
+    question: "<b>Từ nào ở trên sai chính tả?</b>",
+    choices: ["Địa phương", "Đông Bắc", "Kho tàng", "Lạn Sơn"],
+    correctIndex: 3,
+  },
+
   9: {
     id: 9,
     title: "Phú Thọ",

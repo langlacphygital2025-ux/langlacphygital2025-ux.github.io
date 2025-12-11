@@ -11,6 +11,6 @@ export const listenToSoundQuestions = {
     question: "Cá quả được người Hà Tĩnh gọi là?",
     audio: haTinhAudio,
     choices: ["Cá lóc", "Cá chuối", "Cá tràu", "Cá đô"],
-    correctIndex: 3, // "Cá đô" ✅
+    correctIndex: 2, // "Cá đô" ✅
   },
 };

@@ -5,6 +5,12 @@ import khanhHoa25 from "../../assets/read_and_choose_image_modal/khanh_hoa_25.pn
 import tayNinh28 from "../../assets/read_and_choose_image_modal/tay_ninh_28.png";
 import hoChiMinh29 from "../../assets/read_and_choose_image_modal/ho_chi_minh_29.png";
 
+// Question 26: Lâm Đồng - Images for choices A, B, C, D
+import lamDongA from "../../assets/lam_dong/A.png";
+import lamDongB from "../../assets/lam_dong/B.png";
+import lamDongC from "../../assets/lam_dong/C.png";
+import lamDongD from "../../assets/lam_dong/D.png";
+
 export const readAndChooseWithImageQuestions = {
   // Question 24: Đắk Lắk
   24: {
@@ -65,5 +71,18 @@ export const readAndChooseWithImageQuestions = {
       "Để dễ phân biệt với các tỉnh khác ở miền Nam",
     ],
     correctIndex: 1, // "Tưởng nhớ Bác Hồ..." ✅
+  },
+
+  // Question 26: Lâm Đồng - Image-based choices
+  26: {
+    id: 26,
+    title: "Lâm Đồng",
+    prompt:
+      "Đà Lạt nằm trên cao nguyên Lâm Viên (còn gọi là cao nguyên Lang Biang) thuộc tỉnh Lâm Đồng, vùng Tây Nguyên, với độ cao trung bình 1.500 m so với mực nước biển.",
+    question:
+      "Các bạn nghĩ đâu không phải là hình ảnh của Đà Lạt (Thuộc tỉnh Lâm Đồng)?",
+    imageChoices: [lamDongA, lamDongB, lamDongC, lamDongD],
+    choiceLabels: ["A", "B", "C", "D"],
+    correctIndex: 2, // Choice D (Nha Trang/Khánh Hòa) is NOT Da Lat ✅
   },
 };

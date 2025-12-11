@@ -28,6 +28,8 @@ export default function ReadAndChooseAnswerWithImageModal({
     question,
     image,
     choices = [],
+    imageChoices = [],
+    choiceLabels = [],
     correctIndex,
   } = questionData;
 
@@ -42,17 +44,18 @@ export default function ReadAndChooseAnswerWithImageModal({
   }
 
   function handleKeyDown(e) {
-    if (!choices.length) return;
+    const totalChoices = imageChoices.length || choices.length;
+    if (!totalChoices) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setSelected((s) => {
         if (s === null) return 0;
-        return Math.min(choices.length - 1, s + 1);
+        return Math.min(totalChoices - 1, s + 1);
       });
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setSelected((s) => {
-        if (s === null) return choices.length - 1;
+        if (s === null) return totalChoices - 1;
         return Math.max(0, s - 1);
       });
     } else if (e.key === "Enter") {
@@ -85,19 +88,10 @@ export default function ReadAndChooseAnswerWithImageModal({
           </div>
         )}
 
-        {/* Image display area */}
-        {image && (
-          <div className="read-choose-image-wrapper">
-            <img
-              src={image}
-              alt="question image"
-              className="read-choose-image"
-            />
-          </div>
+        {/* Prompt text - shown above question for image choices */}
+        {prompt && imageChoices.length > 0 && (
+          <p className="read-choose-image-prompt">{prompt}</p>
         )}
-
-        {/* Title */}
-        {/* {title && <h2 className="read-choose-image-title">{title}</h2>} */}
 
         {/* Question text */}
         {question && (
@@ -112,40 +106,92 @@ export default function ReadAndChooseAnswerWithImageModal({
           />
         )}
 
-        {/* Choice buttons */}
+        {/* Image display area - only for single image questions */}
+        {image && (
+          <div className="read-choose-image-wrapper">
+            <img
+              src={image}
+              alt="question image"
+              className="read-choose-image"
+            />
+          </div>
+        )}
+
+        {/* Choice buttons - Text or Image based */}
         <div
           role="list"
           aria-label="answer choices"
-          className="read-choose-choices"
+          className={`read-choose-choices ${
+            imageChoices.length > 0 ? "image-grid-choices" : ""
+          }`}
         >
-          {choices.map((choiceText, i) => {
-            const isSelected = selected === i;
-            const isCorrect = submitted && i === correctIndex;
-            const isWrong =
-              submitted && isSelected && selected !== correctIndex;
+          {imageChoices.length > 0
+            ? // Render image choices with separate labels
+              imageChoices.map((choiceImage, i) => {
+                const label = choiceLabels[i] || String.fromCharCode(65 + i); // A, B, C, D
 
-            const classNames = ["read-choose-choice"];
-            if (isSelected && !submitted) classNames.push("selected");
-            if (isCorrect) classNames.push("correct");
-            if (isWrong) classNames.push("wrong");
+                return (
+                  <div key={i} className="image-choice-container">
+                    <button
+                      className="image-choice-image-wrapper"
+                      onClick={() => !submitted && setSelected(i)}
+                      disabled={submitted}
+                      aria-label={`Choice ${label}`}
+                    >
+                      <img
+                        src={choiceImage}
+                        alt={`Choice ${label}`}
+                        className="choice-image"
+                      />
+                    </button>
+                    <button
+                      role="listitem"
+                      aria-pressed={selected === i}
+                      aria-label={`Choice ${label}`}
+                      onClick={() => !submitted && setSelected(i)}
+                      className={`choice-label-button ${
+                        selected === i ? "selected" : ""
+                      } ${submitted && i === correctIndex ? "correct" : ""} ${
+                        submitted && selected === i && selected !== correctIndex
+                          ? "wrong"
+                          : ""
+                      }`}
+                      disabled={submitted}
+                    >
+                      {label}
+                    </button>
+                  </div>
+                );
+              })
+            : // Render text choices
+              choices.map((choiceText, i) => {
+                const isSelected = selected === i;
+                const isCorrect = submitted && i === correctIndex;
+                const isWrong =
+                  submitted && isSelected && selected !== correctIndex;
 
-            return (
-              <button
-                key={i}
-                role="listitem"
-                aria-pressed={isSelected}
-                aria-label={`Choice ${i + 1}: ${choiceText}`}
-                onClick={() => !submitted && setSelected(i)}
-                className={classNames.join(" ")}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") e.stopPropagation();
-                }}
-                disabled={submitted}
-              >
-                {choiceText}
-              </button>
-            );
-          })}
+                const classNames = ["read-choose-choice"];
+                if (isSelected && !submitted) classNames.push("selected");
+                if (isCorrect) classNames.push("correct");
+                if (isWrong) classNames.push("wrong");
+
+                return (
+                  <button
+                    key={i}
+                    role="listitem"
+                    aria-pressed={isSelected}
+                    aria-label={`Choice ${i + 1}: ${choiceText}`}
+                    onClick={() => !submitted && setSelected(i)}
+                    className={classNames.join(" ")}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") e.stopPropagation();
+                    }}
+                    disabled={submitted}
+                  >
+                    {choiceText}
+                  </button>
+                );
+              })}
         </div>
 
         {/* Confirm button */}

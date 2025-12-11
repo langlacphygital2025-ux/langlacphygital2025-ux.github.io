@@ -1,0 +1,432 @@
+/**
+ * DoTheChallengeWithImageModal - Redesigned Layout
+ * 
+ * KEY PRINCIPLES:
+ * 1. NO fixed heights on containers - only images have fixed dimensions
+ * 2. Content flows naturally downward (flex column)
+ * 3. Horizontal scroll only for carousel (overflow-x: auto)
+ * 4. All vertical content displays fully (overflow-y: auto)
+ * 5. Slide structure: [image] [indicator] [button] stacked vertically
+ */
+
+/* ============================================================================
+   ROOT & SHEET - Main structural containers
+   ============================================================================ */
+
+.do-the-challenge-with-image-root .gameplay-sheet {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  /* Override global modal constraints - allow natural scrolling */
+  height: auto !important;
+  max-height: none !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+/* ============================================================================
+   LOGO SECTION - Fixed size, centered
+   ============================================================================ */
+
+.do-the-challenge-with-image-root .do-the-challenge-logo-container {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* ============================================================================
+   HEADER SECTION - Question + Prompt
+   ============================================================================ */
+
+.do-the-challenge-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 333px;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-with-image-question {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  margin: 0;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-with-image-question b {
+  font-weight: 700;
+  font-family: "Fz Poppins", Arial, sans-serif;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-with-image-prompt {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+/* ============================================================================
+   CAROUSEL SECTION - Horizontal scrollable area for 3 slides
+   ============================================================================
+   
+   KEY FIX: 
+   - Only carousel scrolls horizontally (for side-by-side slides)
+   - Entire modal scrolls vertically (handled by gameplay-sheet)
+   - No height constraint - sizes to content
+   ============================================================================ */
+
+.do-the-challenge-carousel-container {
+  width: 100%;
+  max-width: 392px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  border-radius: 0;
+  position: relative;
+  touch-action: pan-x;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Hide scrollbar for cleaner appearance */
+.do-the-challenge-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.do-the-challenge-carousel-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================================================
+   CAROUSEL WRAPPER - Flex row with all slides
+   ============================================================================
+   
+   KEY FIX:
+   - display: flex, flex-direction: row
+   - gap: 36px (Figma spec)
+   - padding: 0 34px (Figma spec)
+   - width: fit-content (natural width for all 3 slides)
+   - NO height property - sizes to tallest content
+   ============================================================================ */
+
+.do-the-challenge-carousel {
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+  padding: 0 34px;
+  width: fit-content;
+  align-items: flex-start;
+}
+
+/* ============================================================================
+   INDIVIDUAL SLIDE - Vertical stack of image + indicator + button
+   ============================================================================
+   
+   KEY FIX:
+   - width: 333px fixed (from Figma)
+   - flex-shrink: 0 (don't shrink)
+   - display: flex, flex-direction: column (vertical stack)
+   - gap: 8px (space between elements)
+   - NO height - sizes to content (image 186px + indicator + button)
+   ============================================================================ */
+
+.do-the-challenge-slide {
+  width: 333px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+/* ============================================================================
+   IMAGE AREA - Image with overlay and title
+   ============================================================================
+   
+   KEY FIX:
+   - height: 186px fixed (from Figma - 16:9 ratio)
+   - overflow: hidden (clip the image only)
+   - Does NOT contain indicator or button (they're separate flex items)
+   ============================================================================ */
+
+.do-the-challenge-image-wrapper {
+  width: 100%;
+  height: 186px;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.do-the-challenge-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dark overlay bar covering entire text area */
+.do-the-challenge-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image title/location name - centered on overlay */
+.do-the-challenge-image-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  color: #ffffff;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5em;
+  text-align: center;
+  z-index: 2;
+  white-space: normal;
+  word-wrap: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+/* ============================================================================
+   SLIDE INDICATOR - (1/3, 2/3, 3/3) displayed below image
+   ============================================================================
+   
+   KEY FIX:
+   - position: static (normal flex flow - NOT absolute)
+   - Natural element in flex column (flows after image)
+   - Fully visible, not clipped
+   - Centered text
+   ============================================================================ */
+
+.do-the-challenge-slide-indicator {
+  position: static;
+  color: #404040;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: auto;
+  text-align: center;
+}
+
+/* ============================================================================
+   ACTION BUTTON - Pose instruction text
+   ============================================================================
+   
+   KEY FIX:
+   - width: 100% (full slide width)
+   - min-height: 60px (NOT max-height!)
+   - NO flex-grow (don't expand)
+   - Natural flex item in column
+   - Rounded bottom corners to match image top corners
+   ============================================================================ */
+
+.do-the-challenge-action-button {
+  width: 100%;
+  background: #f2f2f7;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #8c8c8c;
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.do-the-challenge-action-button span {
+  display: block;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* ============================================================================
+   RATING SECTION - Below carousel
+   ============================================================================ */
+
+.do-the-challenge-rating-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.do-the-challenge-evaluation-text {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  margin: 0;
+  color: #404040;
+  font-size: 14px;
+}
+
+/* ============================================================================
+   STARS - Rating selector
+   ============================================================================ */
+
+.do-the-challenge-stars {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.do-the-challenge-star {
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  color: transparent;
+  transition: all 150ms ease;
+  padding: 0;
+  outline: none;
+  box-shadow: none !important;
+  position: relative;
+  -webkit-text-stroke: 2px #f37327;
+  line-height: 1;
+}
+
+.do-the-challenge-star:hover:not(:disabled) {
+  transform: scale(1.15);
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.do-the-challenge-star.filled {
+  color: #f37327;
+  -webkit-text-stroke: 0px;
+}
+
+.do-the-challenge-star:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.do-the-challenge-star.submitted {
+  cursor: default;
+  transition: none;
+}
+
+/* ============================================================================
+   CONTROLS - Confirm button
+   ============================================================================ */
+
+.do-the-challenge-with-image-root .do-the-challenge-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-confirm {
+  padding: 10px 20px;
+  border-radius: 28px;
+  border: none;
+  background: #ffd24d;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-size: 18px;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+}
+
+.do-the-challenge-with-image-root .do-the-challenge-confirm.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   RESPONSIVE - Mobile adjustments
+   ============================================================================
+   
+   KEY FIX:
+   - NO fixed height on carousel container
+   - Adjust spacing and widths only
+   - Let content flow naturally
+   ============================================================================ */
+
+@media (max-width: 480px) {
+  .do-the-challenge-with-image-root .gameplay-sheet {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .do-the-challenge-carousel-container {
+    max-width: 100%;
+  }
+
+  .do-the-challenge-carousel {
+    gap: 18px;
+    padding: 13px 29.5px;
+  }
+
+  .do-the-challenge-slide {
+    width: 320px;
+  }
+
+  .do-the-challenge-stars {
+    gap: 12px;
+  }
+
+  .do-the-challenge-star {
+    font-size: 40px;
+  }
+
+  .do-the-challenge-evaluation-text {
+    font-size: 13px;
+  }
+
+  .do-the-challenge-with-image-question {
+    font-size: 13px;
+  }
+
+  .do-the-challenge-with-image-prompt {
+    font-size: 13px;
+  }
+}

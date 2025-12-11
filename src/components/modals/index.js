@@ -7,8 +7,12 @@ export { default as ListenToSoundPickRightAnswerModal } from "./ListenToSoundPic
 export { default as MemorizeInLimitedTimeAndChooseAnswerModal } from "./MemorizeInLimitedTimeAndChooseAnswerModal";
 export { default as TypeInAnswerModal } from "./TypeInAnswerModal";
 export { default as DoTheChallengeModal } from "./DoTheChallengeModal";
+export { default as DoTheChallengeWithImageModal } from "./DoTheChallengeWithImageModal";
 export { default as EnterTextAsAnswerModal } from "./EnterTextAsAnswerModal";
 export { default as ClassifyWordsModal } from "./ClassifyWordsModal";
 export { default as MatchPairsModal } from "./MatchPairsModal";
+export { default as PerformanceChallengeModal } from "./PerformanceChallengeModal";
+export { default as ReciteAudioPerformanceModal } from "./ReciteAudioPerformanceModal";
+export { default as FinalWinModal } from "./FinalWinModal";
 export { default as SuccessModal } from "./SuccessModal";
 export { default as FailedModal } from "./FailedModal";

@@ -188,3 +188,110 @@
     font-size: 14px;
   }
 }
+
+/* Image Grid Choices (for Question 26 - Lâm Đồng) */
+.read-choose-image-root .image-grid-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.read-choose-image-root .image-choice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.read-choose-image-root .image-choice-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 28px;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+  transition: transform 150ms ease;
+}
+
+.read-choose-image-root .image-choice-image-wrapper:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+
+.read-choose-image-root .image-choice-image-wrapper:disabled {
+  cursor: not-allowed;
+}
+
+.read-choose-image-root .image-choice-image-wrapper .choice-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.read-choose-image-root .choice-label-button {
+  width: 100%;
+  padding: 8px 20px;
+  border-radius: 24px;
+  background: #F2F2F7;
+  color: #8C8C8C;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.read-choose-image-root .choice-label-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.read-choose-image-root .choice-label-button.selected {
+  background: #F37327;
+  color: white;
+}
+
+.read-choose-image-root .choice-label-button.correct {
+  background: #F37327;
+  color: white;
+}
+
+.read-choose-image-root .choice-label-button.wrong {
+  background: #e04a3f;
+  color: white;
+}
+
+.read-choose-image-root .choice-label-button:disabled {
+  cursor: not-allowed;
+}
+
+/* Prompt text styling for image grid questions */
+.read-choose-image-root .read-choose-image-prompt {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .read-choose-image-root .image-grid-choices {
+    gap: 12px;
+  }
+
+  .read-choose-image-root .image-choice-image-wrapper {
+    border-radius: 20px;
+  }
+
+  .read-choose-image-root .choice-label-button {
+    font-size: 14px;
+    padding: 6px 16px;
+    min-width: 50px;
+  }
+}
+

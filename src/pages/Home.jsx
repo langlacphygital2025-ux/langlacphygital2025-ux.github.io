@@ -20,6 +20,8 @@ import { getEnterTextAsAnswerQuestion } from "../components/modals/enterTextAsAn
 import { getClassifyWordsQuestion } from "../components/modals/classifyWordsQuestions";
 import { getMatchPairsQuestion } from "../components/modals/matchPairsQuestions";
 import { getMemorizeInLimitedTimeQuestion } from "../components/modals/memorizeInLimitedTimeQuestions";
+import { performanceChallengeQuestions } from "../components/modals/performanceChallengeQuestions";
+import { reciteAudioPerformanceQuestions } from "../components/modals/reciteAudioPerformanceQuestions";
 
 function HomeInner() {
   const {
@@ -28,6 +30,10 @@ function HomeInner() {
     answerQuestion,
     setCurrentTeam,
     switchTurn,
+    answeredQuestions,
+    markQuestionAnswered,
+    isQuestionAnswered,
+    reset,
   } = useGame();
   const {
     transitionToChatbotState,
@@ -52,6 +58,26 @@ function HomeInner() {
   const [successOpen, setSuccessOpen] = useState(false);
   const [failureOpen, setFailureOpen] = useState(false);
   const [resultInfo, setResultInfo] = useState({ added: 0, total: 0 });
+  const [finalWinOpen, setFinalWinOpen] = useState(false);
+  const [lastQuestionId, setLastQuestionId] = useState(null);
+  const [debugInitialized, setDebugInitialized] = useState(false);
+
+  // Check if game is complete and show final modal
+  useEffect(() => {
+    if (finalWinOpen) return; // Already showing final modal
+
+    const allQuestionsAnswered = Object.keys(answeredQuestions).length >= 31;
+
+    if (allQuestionsAnswered && successOpen) {
+      console.log(
+        "✅ All questions answered and success modal open - showing final modal"
+      );
+      setSuccessOpen(false);
+      setTimeout(() => {
+        setFinalWinOpen(true);
+      }, 100);
+    }
+  }, [answeredQuestions, successOpen, finalWinOpen]);
 
   // mapping 1..9 to modal keys
   const mapping = [
@@ -72,6 +98,30 @@ function HomeInner() {
       transitionToChatbotState(CHATBOT_STATES.INTRO);
     }
   }, [videoFinished, transitionToChatbotState, CHATBOT_STATES]);
+
+  // DEBUG: Pre-populate answered questions for testing (all but question 18)
+  // Set DEBUG_ENABLE to true to test final win modal
+  // This will mark questions 1-17, 19-31 as already answered by one of the teams
+  useEffect(() => {
+    const DEBUG_ENABLE = false; // Set to true to test final win modal
+
+    if (DEBUG_ENABLE && !debugInitialized) {
+      // Manually update answered questions without triggering infinite loop
+      const answeredQs = {};
+      for (let i = 1; i <= 31; i++) {
+        if (i !== 18) {
+          // Leave question 18 unanswered for testing
+          answeredQs[i] = "success";
+        }
+      }
+      // Use internal state update via GameProvider's context
+      for (let id in answeredQs) {
+        markQuestionAnswered(parseInt(id), answeredQs[id]);
+      }
+      setDebugInitialized(true);
+      console.log("DEBUG: Pre-populated 30 answered questions (all but #18)");
+    }
+  }, [debugInitialized, markQuestionAnswered]);
 
   const handleStartClick = () => {
     setBottomSheetOpen(true);
@@ -105,6 +155,16 @@ function HomeInner() {
     resetIdleTimer();
     const n = parseInt(val, 10);
 
+    // Check if question already answered (by either team)
+    if (isQuestionAnswered(n)) {
+      // Re-open game modal and show feedback
+      transitionToChatbotState(CHATBOT_STATES.FAILURE);
+      setGameModalOpen(true);
+      return;
+    }
+
+    setLastQuestionId(n);
+
     // first check if this number corresponds to a WatchVideoAndChooseRightAnswerModal question
     const videoQ = watchVideoAndChooseQuestions[n];
     if (videoQ) {
@@ -130,6 +190,26 @@ function HomeInner() {
     if (soundQ) {
       setActiveModalKey("ListenToSoundPickRightAnswerModal");
       setActiveQuestionData(soundQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // then check if this number corresponds to a ReciteAudioPerformanceModal question
+    const reciteQ = reciteAudioPerformanceQuestions[n];
+    if (reciteQ) {
+      setActiveModalKey("ReciteAudioPerformanceModal");
+      setActiveQuestionData(reciteQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
+    // then check if this number corresponds to a DoTheChallengeWithImageModal question (question 21)
+    const doWithImageQ = doChallengeQuestions[n];
+    if (doWithImageQ && n === 21) {
+      setActiveModalKey("DoTheChallengeWithImageModal");
+      setActiveQuestionData(doWithImageQ);
       setGameModalOpen(false);
       setQuestionOpen(true);
       return;
@@ -185,6 +265,16 @@ function HomeInner() {
       return;
     }
 
+    // then check if this number corresponds to a PerformanceChallengeModal question
+    const perfQ = performanceChallengeQuestions[n];
+    if (perfQ) {
+      setActiveModalKey("PerformanceChallengeModal");
+      setActiveQuestionData(perfQ);
+      setGameModalOpen(false);
+      setQuestionOpen(true);
+      return;
+    }
+
     // then check if this number corresponds to a ReadAndChooseAnswerWithImageModal question
     const imageQ = readAndChooseWithImageQuestions[n];
     if (imageQ) {
@@ -229,6 +319,11 @@ function HomeInner() {
         newTotal = prev + 1;
       }
       transitionToChatbotState(CHATBOT_STATES.SUCCESS);
+
+      // Mark question as answered only on success
+      if (lastQuestionId !== null) {
+        markQuestionAnswered(lastQuestionId, "success");
+      }
     } else if (result === "failure") {
       added = -3;
       newTotal = Math.max(0, prev - 3);
@@ -249,15 +344,26 @@ function HomeInner() {
   const ActiveModal = activeModalKey ? Modals[activeModalKey] : null;
 
   const handleSuccessClose = useCallback(() => {
-    setSuccessOpen(false);
-    // reopen gameplay modal for next team
-    setTimeout(() => setGameModalOpen(true), 320);
-  }, []);
+    const allQuestionsAnswered = Object.keys(answeredQuestions).length >= 31;
+
+    if (!allQuestionsAnswered) {
+      // If game not complete, reopen gameplay modal for next team
+      setTimeout(() => setGameModalOpen(true), 320);
+    }
+    // If all questions answered, the useEffect will handle showing the final modal
+  }, [answeredQuestions]);
 
   const handleFailureClose = useCallback(() => {
     setFailureOpen(false);
     setTimeout(() => setGameModalOpen(true), 320);
   }, []);
+
+  const handleFinalWinClose = useCallback(() => {
+    // Reset game and start over
+    setFinalWinOpen(false);
+    reset();
+    setBottomSheetOpen(true);
+  }, [reset]);
 
   return (
     <div
@@ -347,6 +453,24 @@ function HomeInner() {
         onClose={handleFailureClose}
         teamName={currentTeamState.teamNames?.[currentTeam]}
         totalPoints={resultInfo.total}
+      />
+
+      <Modals.FinalWinModal
+        isOpen={finalWinOpen}
+        onClose={handleFinalWinClose}
+        onReplay={handleFinalWinClose}
+        winnerTeam={
+          (teamScores.team1 || 0) > (teamScores.team2 || 0)
+            ? currentTeamState.teamNames?.team1 || "ĐỘI LẠC CON"
+            : currentTeamState.teamNames?.team2 || "ĐỘI BE BÉ"
+        }
+        loserTeam={
+          (teamScores.team1 || 0) > (teamScores.team2 || 0)
+            ? currentTeamState.teamNames?.team2 || "ĐỘI BE BÉ"
+            : currentTeamState.teamNames?.team1 || "ĐỘI LẠC CON"
+        }
+        winnerScore={Math.max(teamScores.team1 || 0, teamScores.team2 || 0)}
+        loserScore={Math.min(teamScores.team1 || 0, teamScores.team2 || 0)}
       />
     </div>
   );
