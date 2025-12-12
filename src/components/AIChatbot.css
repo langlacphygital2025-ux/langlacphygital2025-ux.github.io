@@ -117,6 +117,70 @@
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
+.chatbot-icon-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-icon.playing {
+  animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+  50% {
+    filter: drop-shadow(0 4px 20px rgba(255, 212, 86, 0.8)) 
+            drop-shadow(0 0 30px rgba(255, 212, 86, 0.5));
+  }
+}
+
+.sound-wave {
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.wave-bar {
+  width: 3px;
+  height: 12px;
+  background: #FFD456;
+  border-radius: 2px;
+  animation: waveAnimation 0.8s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wave-bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.wave-bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes waveAnimation {
+  0%, 100% {
+    height: 12px;
+    opacity: 0.5;
+  }
+  50% {
+    height: 24px;
+    opacity: 1;
+  }
+}
+
 /* Speech bubble */
 .speech-bubble {
   position: absolute;
@@ -156,13 +220,34 @@
 .bubble-text {
   margin: 0;
   padding: 0;
-  transition: opacity 0.2s ease-in-out;
+  animation: chunkFadeIn 0.4s ease-out;
 }
 
-.bubble-text {
-  margin: 0;
-  padding: 0;
-  transition: opacity 0.2s ease-in-out;
+/* Chunk transition animations */
+@keyframes chunkFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes chunkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bubble-text[data-chunk-index] {
+  animation: chunkFadeIn 0.4s ease-out;
 }
 
 /* Keep legacy keyframes for backwards compatibility */
@@ -308,5 +393,29 @@
   .chatbot-container.corner-3 {
     bottom: 10px;
     left: 10px;
+  }
+
+  .mute-button {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .sound-wave {
+    left: 105%;
+  }
+
+  .wave-bar {
+    width: 2px;
+    height: 10px;
+  }
+
+  @keyframes waveAnimation {
+    0%, 100% {
+      height: 10px;
+    }
+    50% {
+      height: 18px;
+    }
   }
 }

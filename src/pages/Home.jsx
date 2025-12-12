@@ -92,10 +92,14 @@ function HomeInner() {
     "MatchPairsModal",
   ];
 
-  // Show intro message after video finishes
+  // Show intro sequence after video finishes: INTRO → LEGEND
   useEffect(() => {
     if (videoFinished) {
       transitionToChatbotState(CHATBOT_STATES.INTRO);
+
+      setTimeout(() => {
+        transitionToChatbotState(CHATBOT_STATES.LEGEND);
+      }, 15000);
     }
   }, [videoFinished, transitionToChatbotState, CHATBOT_STATES]);
 
@@ -128,14 +132,16 @@ function HomeInner() {
   };
 
   const handleOpenGameModal = ({ teamNames, currentTeam }) => {
-    // parent handler called after BottomSheet fade-out
     setCurrentTeamState({ teamNames, currentTeam });
-    // sync provider current team so turns are tracked centrally
     if (setCurrentTeam) setCurrentTeam(currentTeam);
     setGameModalOpen(true);
-    // Transition to TURN_START state when game modal opens
+
     transitionToChatbotState(CHATBOT_STATES.TURN_START);
-    startAwaitingInput();
+
+    setTimeout(() => {
+      transitionToChatbotState(CHATBOT_STATES.CHALLENGE_INPUT);
+      startAwaitingInput();
+    }, 12000);
   };
 
   const handleCloseGameModal = () => {
@@ -143,10 +149,18 @@ function HomeInner() {
   };
 
   const handleSkip = () => {
-    // Switch to next team without closing the modal
     switchTurn();
     transitionToChatbotState(CHATBOT_STATES.TURN_START);
     startAwaitingInput();
+  };
+
+  const handleHopeSquare = () => {
+    transitionToChatbotState(CHATBOT_STATES.HOPE_SQUARE);
+    resetIdleTimer();
+
+    setTimeout(() => {
+      console.log("Hope square activated!");
+    }, 10000);
   };
 
   function handleSubmitNumber(val) {
@@ -429,6 +443,7 @@ function HomeInner() {
         currentTeamName={currentTeamState.teamNames?.[currentTeam]}
         onSubmit={handleSubmitNumber}
         onSkip={handleSkip}
+        onHopeSquare={handleHopeSquare}
       />
 
       {ActiveModal && (

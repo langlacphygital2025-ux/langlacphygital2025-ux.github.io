@@ -2,29 +2,38 @@ import React, { useState } from "react";
 import "./GamePlayModal.css";
 import leafHat from "../assets/leaf-hat.png";
 
-function GamePlayModal({ isOpen, onClose, currentTeamName, onSubmit, onSkip }) {
+function GamePlayModal({
+  isOpen,
+  onClose,
+  currentTeamName,
+  onSubmit,
+  onSkip,
+  onHopeSquare,
+}) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
 
   if (!isOpen) return null;
 
   const handleAccept = () => {
-    // normalize input: extract first numeric segment (e.g., " 09 " -> "09")
     const normalized = (value || "").toString().trim();
     const digitsMatch = normalized.match(/\d+/);
     const numeric = digitsMatch ? digitsMatch[0] : normalized;
     if (onSubmit) onSubmit(numeric);
-    // do not call onClose here; parent will manage modal lifecycle after handling submit
   };
 
   const handleSkip = () => {
-    // Reset input for next team
     setValue("");
-    // Call onSkip if provided, otherwise fall back to onClose
     if (onSkip) {
       onSkip();
     } else if (onClose) {
       onClose();
+    }
+  };
+
+  const handleHopeSquare = () => {
+    if (onHopeSquare) {
+      onHopeSquare();
     }
   };
 
@@ -48,7 +57,7 @@ function GamePlayModal({ isOpen, onClose, currentTeamName, onSubmit, onSkip }) {
         <button className="gameplay-accept" onClick={handleAccept}>
           Nhận thử thách
         </button>
-        <button className="gameplay-leaf-button">
+        <button className="gameplay-leaf-button" onClick={handleHopeSquare}>
           <img src={leafHat} className="gameplay-leaf" alt="leaf hat" />
           <span>Nón lá hi vọng</span>
         </button>
