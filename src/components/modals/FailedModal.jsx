@@ -7,6 +7,7 @@ export default function FailedModal({
   onClose,
   teamName,
   totalPoints = 0,
+  isHopeHat = false,
 }) {
   const [closing, setClosing] = useState(false);
 
@@ -38,13 +39,19 @@ export default function FailedModal({
         <div className="failed-title">Sai rồi</div>
 
         <div className="failed-sub">
-          Không cộng điểm cho {teamName || "ĐỘI 1"}
+          {isHopeHat
+            ? "Chúc bạn may mắn lần sau"
+            : `Không cộng điểm cho ${teamName || "ĐỘI 1"}`}
         </div>
 
-        <div className="failed-total-label">Tổng</div>
-        <div className="failed-total">
-          {String(totalPoints).padStart(2, "0")}
-        </div>
+        {!isHopeHat && (
+          <>
+            <div className="failed-total-label">Tổng</div>
+            <div className="failed-total">
+              {String(totalPoints).padStart(2, "0")}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

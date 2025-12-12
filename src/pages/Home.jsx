@@ -22,6 +22,7 @@ import { getMatchPairsQuestion } from "../components/modals/matchPairsQuestions"
 import { getMemorizeInLimitedTimeQuestion } from "../components/modals/memorizeInLimitedTimeQuestions";
 import { performanceChallengeQuestions } from "../components/modals/performanceChallengeQuestions";
 import { reciteAudioPerformanceQuestions } from "../components/modals/reciteAudioPerformanceQuestions";
+import { getRandomHopeHatQuestion } from "../components/modals/hopeHatQuestions";
 
 function HomeInner() {
   const {
@@ -61,6 +62,7 @@ function HomeInner() {
   const [finalWinOpen, setFinalWinOpen] = useState(false);
   const [lastQuestionId, setLastQuestionId] = useState(null);
   const [debugInitialized, setDebugInitialized] = useState(false);
+  const [isHopeHatChallenge, setIsHopeHatChallenge] = useState(false);
 
   // Check if game is complete and show final modal
   useEffect(() => {
@@ -158,15 +160,24 @@ function HomeInner() {
     transitionToChatbotState(CHATBOT_STATES.HOPE_SQUARE);
     resetIdleTimer();
 
-    setTimeout(() => {
-      console.log("Hope square activated!");
-    }, 10000);
+    // Get a random Hope Hat question (one of 3 modal types)
+    const randomQuestion = getRandomHopeHatQuestion();
+
+    // Set the modal and question data
+    setActiveModalKey(randomQuestion.modalType);
+    setActiveQuestionData(randomQuestion);
+    setGameModalOpen(false);
+    setQuestionOpen(true);
+    setIsHopeHatChallenge(true);
+
+    console.log("Hope square activated! Modal:", randomQuestion.modalType);
   };
 
   function handleSubmitNumber(val) {
     // Transition to CHALLENGE_SHOWN state when question is revealed
     transitionToChatbotState(CHATBOT_STATES.CHALLENGE_SHOWN);
     resetIdleTimer();
+    setIsHopeHatChallenge(false);
     const n = parseInt(val, 10);
 
     // Check if question already answered (by either team)
@@ -358,6 +369,7 @@ function HomeInner() {
   const ActiveModal = activeModalKey ? Modals[activeModalKey] : null;
 
   const handleSuccessClose = useCallback(() => {
+    setSuccessOpen(false);
     const allQuestionsAnswered = Object.keys(answeredQuestions).length >= 31;
 
     if (!allQuestionsAnswered) {
@@ -461,6 +473,7 @@ function HomeInner() {
         teamName={currentTeamState.teamNames?.[currentTeam]}
         addedPoints={resultInfo.added > 0 ? resultInfo.added : 0}
         totalPoints={resultInfo.total}
+        isHopeHat={isHopeHatChallenge}
       />
 
       <Modals.FailedModal
@@ -468,6 +481,7 @@ function HomeInner() {
         onClose={handleFailureClose}
         teamName={currentTeamState.teamNames?.[currentTeam]}
         totalPoints={resultInfo.total}
+        isHopeHat={isHopeHatChallenge}
       />
 
       <Modals.FinalWinModal

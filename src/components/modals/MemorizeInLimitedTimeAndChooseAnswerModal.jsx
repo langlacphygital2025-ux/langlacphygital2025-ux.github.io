@@ -72,8 +72,10 @@ export default function MemorizeInLimitedTimeAndChooseAnswerModal({
   const [pairs, setPairs] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [activeId, setActiveId] = useState(null);
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const rootRef = useRef(null);
   const timerRef = useRef(null);
+  const itemCycleRef = useRef(null);
 
   // Configure sensors for drag and drop
   const sensors = useSensors(
@@ -96,6 +98,7 @@ export default function MemorizeInLimitedTimeAndChooseAnswerModal({
       setPairs([]);
       setSubmitted(false);
       setActiveId(null);
+      setCurrentItemIndex(0);
 
       // Set up pairs for drag-drop questions
       if (questionData.type === "dragdrop" && questionData.pairs) {
@@ -129,11 +132,38 @@ export default function MemorizeInLimitedTimeAndChooseAnswerModal({
     };
   }, [stage, timeLeft, questionData]);
 
+  // Cycle through items for drag-drop memorization
+  useEffect(() => {
+    if (
+      stage === "memorize" &&
+      questionData?.type === "dragdrop" &&
+      questionData?.memorizationContent?.items?.length > 1
+    ) {
+      const items = questionData.memorizationContent.items;
+      const totalItems = items.length;
+      const totalTime = questionData.memorizationTime * 1000;
+      const timePerItem = totalTime / totalItems;
+
+      itemCycleRef.current = setInterval(() => {
+        setCurrentItemIndex((prev) => (prev + 1) % totalItems);
+      }, timePerItem);
+
+      return () => {
+        if (itemCycleRef.current) {
+          clearInterval(itemCycleRef.current);
+        }
+      };
+    }
+  }, [stage, questionData]);
+
   // Clean up timer on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
+      }
+      if (itemCycleRef.current) {
+        clearInterval(itemCycleRef.current);
       }
     };
   }, []);
@@ -295,19 +325,20 @@ export default function MemorizeInLimitedTimeAndChooseAnswerModal({
               </div>
             ) : (
               <div className="memorize-limited-dragdrop-content">
-                {/* Show only the first item as main image */}
-                {memorizationContent.items && memorizationContent.items[0] && (
-                  <div className="memorize-limited-main-person">
-                    <img
-                      src={memorizationContent.items[0].image}
-                      alt={memorizationContent.items[0].name}
-                      className="memorize-limited-main-person-image"
-                    />
-                    <div className="memorize-limited-main-person-name">
-                      {memorizationContent.items[0].name}
+                {/* Cycle through all items during memorization */}
+                {memorizationContent.items &&
+                  memorizationContent.items[currentItemIndex] && (
+                    <div className="memorize-limited-main-person">
+                      <img
+                        src={memorizationContent.items[currentItemIndex].image}
+                        alt={memorizationContent.items[currentItemIndex].name}
+                        className="memorize-limited-main-person-image"
+                      />
+                      <div className="memorize-limited-main-person-name">
+                        {memorizationContent.items[currentItemIndex].name}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </div>
             )}
           </div>

@@ -8,6 +8,7 @@ export default function SuccessModal({
   teamName,
   addedPoints = 1,
   totalPoints = 0,
+  isHopeHat = false,
 }) {
   const [closing, setClosing] = useState(false);
 
@@ -40,13 +41,19 @@ export default function SuccessModal({
         <div className="success-title">Đúng rùi đó</div>
 
         <div className="success-sub">
-          +{addedPoints} cho {teamName || "ĐỘI 1"}
+          {isHopeHat
+            ? "Thêm 1 token"
+            : `+${addedPoints} cho ${teamName || "ĐỘI 1"}`}
         </div>
 
-        <div className="success-total-label">Tổng</div>
-        <div className="success-total">
-          {String(totalPoints).padStart(2, "0")}
-        </div>
+        {!isHopeHat && (
+          <>
+            <div className="success-total-label">Tổng</div>
+            <div className="success-total">
+              {String(totalPoints).padStart(2, "0")}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

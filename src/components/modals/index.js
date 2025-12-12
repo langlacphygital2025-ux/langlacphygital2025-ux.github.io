@@ -16,3 +16,4 @@ export { default as ReciteAudioPerformanceModal } from "./ReciteAudioPerformance
 export { default as FinalWinModal } from "./FinalWinModal";
 export { default as SuccessModal } from "./SuccessModal";
 export { default as FailedModal } from "./FailedModal";
+export { default as HopeHatChallengeModal } from "./HopeHatChallengeModal";

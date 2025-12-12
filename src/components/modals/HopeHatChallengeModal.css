@@ -1,0 +1,196 @@
+/* Styles for HopeHatChallengeModal */
+.hope-hat-challenge-root.gameplay-overlay {
+  overflow-y: auto;
+  align-items: flex-start;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.hope-hat-challenge-root .gameplay-sheet {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: none;
+  overflow: visible;
+}
+
+/* Challenge logo at top */
+.hope-hat-challenge-logo-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.hope-hat-challenge-logo {
+  width: 96px;
+  height: auto;
+  display: inline-block;
+}
+
+/* Image display section */
+.hope-hat-challenge-image-wrapper {
+  width: 100%;
+  max-width: 333px;
+  min-height: 180px;
+  margin-bottom: 16px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.hope-hat-challenge-image {
+  width: 100%;
+  height: auto;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px;
+}
+
+/* Prompt text */
+.hope-hat-challenge-prompt {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+/* Question text */
+.hope-hat-challenge-question {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 333px;
+}
+
+.hope-hat-challenge-question b {
+  font-weight: 700;
+  font-family: "Fz Poppins", Arial, sans-serif;
+}
+
+/* Evaluation text */
+.hope-hat-challenge-evaluation-text {
+  text-align: center;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #404040;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Star rating */
+.hope-hat-challenge-stars {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 5px 20px;
+}
+
+.hope-hat-challenge-star {
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  color: transparent;
+  transition: all 150ms ease;
+  padding: 0;
+  outline: none;
+  box-shadow: none !important;
+  position: relative;
+  -webkit-text-stroke: 2px #F37327;
+}
+
+.hope-hat-challenge-star:hover:not(:disabled) {
+  transform: scale(1.15);
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.hope-hat-challenge-star.filled {
+  color: #F37327;
+  -webkit-text-stroke: 0px;
+}
+
+.hope-hat-challenge-star:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hope-hat-challenge-star.submitted {
+  cursor: default;
+  transition: none;
+}
+
+/* Control buttons */
+.hope-hat-challenge-controls {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: 167px;
+}
+
+.hope-hat-challenge-confirm {
+  flex: 1;
+  padding: 10px 20px;
+  border-radius: 159px;
+  border: none;
+  background: #FFD456;
+  font-family: "Fz Poppins", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 150ms ease;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hope-hat-challenge-confirm:hover:not(.disabled) {
+  background: #ffca1a;
+}
+
+.hope-hat-challenge-confirm.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .hope-hat-challenge-root .gameplay-sheet {
+    padding: 20px 16px;
+  }
+
+  .hope-hat-challenge-image-wrapper {
+    margin-bottom: 12px;
+  }
+
+  .hope-hat-challenge-stars {
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+
+  .hope-hat-challenge-star {
+    font-size: 40px;
+  }
+
+  .hope-hat-challenge-evaluation-text {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+}
