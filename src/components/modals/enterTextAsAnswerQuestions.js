@@ -29,7 +29,7 @@ export const enterTextAsAnswerQuestions = {
     prompt: "Điền câu trả lời",
     question:
       "<p><strong>THỬ THÁCH</strong></p><p style='margin-top: 12px;'>Loại trái cây nào nổi tiếng của tỉnh Đồng Nai có tên gọi là hai chữ lặp lại bắt đầu bằng chữ C?</p>",
-    correctAnswer: "Cacao",
+    correctAnswer: "Chôm chôm",
   },
 
   // Question 34: Cà Mau
@@ -39,7 +39,7 @@ export const enterTextAsAnswerQuestions = {
     prompt: "Điền câu trả lời",
     question:
       "<p><strong>THỬ THÁCH</strong></p><p style='margin-top: 12px;'>Ở Cà Mau có vườn quốc gia dự trữ sinh quyển của thế giới được UNESCO công nhận với tên gọi đọc ngược là <strong>Ha Minh Ụ</strong>. Tên gọi của vườn quốc gia đó là?</p>",
-    correctAnswer: "Ụ Minh Hạ",
+    correctAnswer: "U Minh Hạ",
   },
 };
 

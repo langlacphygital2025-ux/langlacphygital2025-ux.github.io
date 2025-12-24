@@ -355,6 +355,14 @@
   gap: 16px;
 }
 
+.memorize-limited-pill-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 116px;
+  flex-shrink: 0;
+}
+
 .memorize-limited-pill {
   background: #FFFAF6;
   border: 4px solid #F37327;
@@ -370,7 +378,7 @@
   max-height: 48px;
   box-shadow: none;
   flex-shrink: 0;
-  margin: 34px 0;
+  margin: 0;
 }
 
 .memorize-limited-pill:hover:not(.submitted) {
@@ -499,9 +507,14 @@
     height: 80px;
   }
 
+  .memorize-limited-pill-wrapper {
+    height: 80px;
+  }
+
   .memorize-limited-pill {
     width: 130px;
     height: 44px;
+    margin: 0;
   }
 
   .memorize-limited-person-image {

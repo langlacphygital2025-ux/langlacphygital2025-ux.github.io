@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import "./GamePlayModal.css";
 import leafHat from "../assets/leaf-hat.png";
 
+// Valid question range
+const MIN_QUESTION = 1;
+const MAX_QUESTION = 34;
+
 function GamePlayModal({
   isOpen,
   onClose,
@@ -15,11 +19,25 @@ function GamePlayModal({
 
   if (!isOpen) return null;
 
-  const handleAccept = () => {
+  // Validate if the input is a valid question number
+  const getValidNumber = () => {
     const normalized = (value || "").toString().trim();
     const digitsMatch = normalized.match(/\d+/);
-    const numeric = digitsMatch ? digitsMatch[0] : normalized;
-    if (onSubmit) onSubmit(numeric);
+    if (!digitsMatch) return null;
+    const num = parseInt(digitsMatch[0], 10);
+    if (num >= MIN_QUESTION && num <= MAX_QUESTION) {
+      return num;
+    }
+    return null;
+  };
+
+  const isValidInput = getValidNumber() !== null;
+
+  const handleAccept = () => {
+    const validNum = getValidNumber();
+    if (validNum !== null && onSubmit) {
+      onSubmit(validNum.toString());
+    }
   };
 
   const handleSkip = () => {
@@ -54,7 +72,11 @@ function GamePlayModal({
           />
         </div>
 
-        <button className="gameplay-accept" onClick={handleAccept}>
+        <button
+          className={`gameplay-accept ${!isValidInput ? "disabled" : ""}`}
+          onClick={handleAccept}
+          disabled={!isValidInput}
+        >
           Nhận thử thách
         </button>
         <button className="gameplay-leaf-button" onClick={handleHopeSquare}>

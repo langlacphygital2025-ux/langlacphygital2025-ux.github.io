@@ -161,8 +161,7 @@ export function ChatbotProvider({ children }) {
           clearChunkTimeouts();
         }, 500);
       } else {
-        const audioNum =
-          audioNumbers[Math.floor(Math.random() * audioNumbers.length)];
+        const audioNum = audioNumbers[0];
         const messageText = getMessageByAudioNumber(audioNum);
         setMessage(messageText);
         // Split message into 5-word chunks

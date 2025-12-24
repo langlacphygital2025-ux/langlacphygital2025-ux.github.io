@@ -41,7 +41,7 @@ export default function FailedModal({
         <div className="failed-sub">
           {isHopeHat
             ? "Chúc bạn may mắn lần sau"
-            : `Không cộng điểm cho ${teamName || "ĐỘI 1"}`}
+            : `Trừ 1 điểm cho đội ${teamName || "ĐỘI 1"}`}
         </div>
 
         {!isHopeHat && (

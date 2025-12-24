@@ -34,12 +34,20 @@ class ChatbotStateManager {
     this.currentState = CHATBOT_STATES.IDLE;
     this.previousState = null;
     this.messageCounters = {};
+    this.stateAudioCounters = {};
     this.initializeCounters();
+    this.initializeStateAudioCounters();
   }
 
   initializeCounters() {
     Object.keys(messages).forEach((category) => {
       this.messageCounters[category] = 0;
+    });
+  }
+
+  initializeStateAudioCounters() {
+    Object.keys(STATE_AUDIO_MAP).forEach((state) => {
+      this.stateAudioCounters[state] = 0;
     });
   }
 
@@ -58,6 +66,24 @@ class ChatbotStateManager {
     return message;
   }
 
+  getNextAudioForState(state) {
+    const audioNumbers = STATE_AUDIO_MAP[state];
+    if (!audioNumbers || audioNumbers.length === 0) {
+      return null;
+    }
+
+    if (this.shouldPlaySequential(state)) {
+      return audioNumbers;
+    }
+
+    const currentIndex = this.stateAudioCounters[state] || 0;
+    const nextAudioNumber = audioNumbers[currentIndex];
+
+    this.stateAudioCounters[state] = (currentIndex + 1) % audioNumbers.length;
+
+    return [nextAudioNumber];
+  }
+
   transitionToState(newState) {
     if (newState === this.currentState) {
       return null;
@@ -66,7 +92,7 @@ class ChatbotStateManager {
     this.previousState = this.currentState;
     this.currentState = newState;
 
-    const audioNumbers = STATE_AUDIO_MAP[newState];
+    const audioNumbers = this.getNextAudioForState(newState);
 
     if (audioNumbers && audioNumbers.length > 0) {
       return {
@@ -110,6 +136,7 @@ class ChatbotStateManager {
     this.currentState = CHATBOT_STATES.IDLE;
     this.previousState = null;
     this.initializeCounters();
+    this.initializeStateAudioCounters();
   }
 
   getState() {

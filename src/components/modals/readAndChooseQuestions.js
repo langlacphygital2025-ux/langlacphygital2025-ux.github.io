@@ -2,6 +2,21 @@
 // shape: { id, title?, prompt?, question, choices: [], correctIndex }
 
 const questions = {
+  3: {
+    id: 3,
+    title: "Lai Châu",
+    prompt:
+      "<b>Đọc to bài thơ sau cho mọi người cùng nghe:</b><br><br>Noọng ơi gà gáy rồi<br>Trời ửng hồng quấn núi<br>Tiếng Mông Dao í ới<br>Tíu tít vang tiếng cười<br>…<br>Lai Châu xứ thần tiên<br>Chợ rợp màu thổ cẩm<br>Mường Than ruộng xanh mướt<br>Ngát hương chè Than Uyên<br><br>Trích bài thơ Nồng nàn Lai Châu (tác giả Hiền Xuân)",
+    question: "<b>Đâu là các danh từ riêng có trong đoạn thơ trên?</b>",
+    choices: [
+      "Mông Dao, hoa ban",
+      "Mường Than, Mông Dao",
+      "San Lùng, chợ phiên",
+      "Gió trăng, Lai Châu",
+    ],
+    correctIndex: 1,
+  },
+
   7: {
     id: 7,
     title: "Lạng Sơn",

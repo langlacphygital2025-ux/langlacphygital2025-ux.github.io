@@ -5,6 +5,14 @@ import phanBoiChau from "../../assets/memorize_in_limited_time/phanboichau.png";
 import phanDinhPhung from "../../assets/memorize_in_limited_time/phandinhphung.png";
 import mysteryFrame from "../../assets/memorize_in_limited_time/mystery_question_frame.png";
 
+// Quiz 1 food images
+import thangCo from "../../assets/quiz_1_switch/THẮNG_CỐ.png";
+import menMen from "../../assets/quiz_1_switch/MÈN_MÉN.png";
+import xoiNguSac from "../../assets/quiz_1_switch/XÔI NGŨ SẮC.png";
+import thitTreo from "../../assets/quiz_1_switch/THỊT_TREO.png";
+import lonCapNach from "../../assets/quiz_1_switch/LỢN_CẮP_NÁCH.png";
+import cheShanTuyet from "../../assets/quiz_1_switch/CHÈ_SHAN_TUYẾT_CỔ_THỤ.png";
+
 export const memorizeInLimitedTimeQuestions = {
   // Question 1: Tuyên Quang (Quiz-based)
   1: {
@@ -16,16 +24,14 @@ export const memorizeInLimitedTimeQuestions = {
     prompt:
       "Đội thực hiện thử thách có 10 giây để nhớ tên của các món ẩm thực đặc trưng mang mạch nguồn văn hóa đồng bào các dân tộc thiểu số trên địa bàn tỉnh Hà Giang, nay thuộc tỉnh Tuyên Quang mới:",
     memorizationContent: {
-      image: haGiang,
       items: [
-        "Thắng cố",
-        "mèn mén",
-        "xôi ngũ sắc",
-        "thịt treo",
-        "lợn cắp nách",
-        "chè Shan tuyết cổ thụ",
+        { name: "THẮNG CỐ", image: thangCo },
+        { name: "MÈN MÉN", image: menMen },
+        { name: "XÔI NGŨ SẮC", image: xoiNguSac },
+        { name: "THỊT TREO", image: thitTreo },
+        { name: "LỢN CẮP NÁCH", image: lonCapNach },
+        { name: "CHÈ SHAN TUYẾT CỔ THỤ", image: cheShanTuyet },
       ],
-      displayName: "THẮNG CỐ",
     },
     question: "Đâu KHÔNG PHẢI là món ẩm thực đặc trưng của Hà Giang?",
     choices: ["Thắng cố", "Thịt treo", "Lẩu gà lá é", "Lợn cắp nách"],

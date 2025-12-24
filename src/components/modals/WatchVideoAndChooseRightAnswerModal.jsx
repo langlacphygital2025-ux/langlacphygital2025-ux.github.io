@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./WatchVideoAndChooseRightAnswerModal.css";
 import challengeLogo from "../../assets/challenge_logo_icon.png";
+import audioManager from "../../utils/AudioManager";
 
 export default function WatchVideoAndChooseRightAnswerModal({
   isOpen,
@@ -14,9 +15,20 @@ export default function WatchVideoAndChooseRightAnswerModal({
   const [videoEnded, setVideoEnded] = useState(false);
   const rootRef = useRef(null);
   const videoRef = useRef(null);
+  const wasAudioPlaying = useRef(false);
+  const previousAudioNumber = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
+      // Save current audio state before pausing
+      wasAudioPlaying.current = audioManager.isPlaying;
+      previousAudioNumber.current = audioManager.currentAudioNumber;
+
+      // Pause background music during video
+      if (wasAudioPlaying.current) {
+        audioManager.pause();
+      }
+
       setSelected(null);
       setSubmitted(false);
       setIsVideoPlaying(true);
@@ -24,6 +36,15 @@ export default function WatchVideoAndChooseRightAnswerModal({
       setTimeout(() => rootRef.current && rootRef.current.focus(), 0);
     }
   }, [isOpen, questionData]);
+
+  // Cleanup: resume audio when modal unmounts
+  useEffect(() => {
+    return () => {
+      if (wasAudioPlaying.current && previousAudioNumber.current) {
+        audioManager.play(previousAudioNumber.current);
+      }
+    };
+  }, []);
 
   if (!isOpen || !questionData) return null;
 
@@ -47,6 +68,12 @@ export default function WatchVideoAndChooseRightAnswerModal({
   function handleVideoEnd() {
     setIsVideoPlaying(false);
     setVideoEnded(true);
+
+    // Resume background music when video ends
+    if (wasAudioPlaying.current && previousAudioNumber.current) {
+      audioManager.play(previousAudioNumber.current);
+      wasAudioPlaying.current = false; // Reset so cleanup doesn't play again
+    }
   }
 
   function handleConfirm() {

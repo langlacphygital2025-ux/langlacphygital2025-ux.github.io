@@ -4,7 +4,7 @@ class AudioManager {
     this.currentAudio = null;
     this.currentAudioNumber = null;
     this.isPlaying = false;
-    this.volume = 0.8;
+    this.volume = 0.4;
     this.isMuted = false;
     this.playQueue = [];
     this.onPlayingCallback = null;

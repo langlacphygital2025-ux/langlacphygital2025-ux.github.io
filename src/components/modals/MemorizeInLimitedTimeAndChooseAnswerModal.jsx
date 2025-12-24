@@ -42,10 +42,14 @@ function SortablePill({ id, answer, isSubmitted }) {
       style={style}
       {...attributes}
       {...listeners}
-      className={`memorize-limited-pill ${isSubmitted ? "submitted" : ""}`}
+      className="memorize-limited-pill-wrapper"
     >
-      <span className="memorize-limited-answer">{answer}</span>
-      {!isSubmitted && <span className="memorize-limited-drag-icon">⋮⋮</span>}
+      <div
+        className={`memorize-limited-pill ${isSubmitted ? "submitted" : ""}`}
+      >
+        <span className="memorize-limited-answer">{answer}</span>
+        {!isSubmitted && <span className="memorize-limited-drag-icon">⋮⋮</span>}
+      </div>
     </div>
   );
 }
@@ -53,9 +57,11 @@ function SortablePill({ id, answer, isSubmitted }) {
 // Drag overlay component
 function PillDragOverlay({ answer }) {
   return (
-    <div className="memorize-limited-pill dragging-overlay">
-      <span className="memorize-limited-answer">{answer}</span>
-      <span className="memorize-limited-drag-icon">⋮⋮</span>
+    <div className="memorize-limited-pill-wrapper">
+      <div className="memorize-limited-pill dragging-overlay">
+        <span className="memorize-limited-answer">{answer}</span>
+        <span className="memorize-limited-drag-icon">⋮⋮</span>
+      </div>
     </div>
   );
 }
@@ -132,11 +138,10 @@ export default function MemorizeInLimitedTimeAndChooseAnswerModal({
     };
   }, [stage, timeLeft, questionData]);
 
-  // Cycle through items for drag-drop memorization
+  // Cycle through items for memorization (both quiz and dragdrop types)
   useEffect(() => {
     if (
       stage === "memorize" &&
-      questionData?.type === "dragdrop" &&
       questionData?.memorizationContent?.items?.length > 1
     ) {
       const items = questionData.memorizationContent.items;
@@ -314,14 +319,20 @@ export default function MemorizeInLimitedTimeAndChooseAnswerModal({
           <div className="memorize-limited-content">
             {type === "quiz" ? (
               <div className="memorize-limited-quiz-content">
-                <img
-                  src={memorizationContent.image}
-                  alt="Food items to memorize"
-                  className="memorize-limited-content-image"
-                />
-                <div className="memorize-limited-display-name">
-                  {memorizationContent.displayName}
-                </div>
+                {/* Cycle through all food items during memorization */}
+                {memorizationContent.items &&
+                  memorizationContent.items[currentItemIndex] && (
+                    <>
+                      <img
+                        src={memorizationContent.items[currentItemIndex].image}
+                        alt={memorizationContent.items[currentItemIndex].name}
+                        className="memorize-limited-content-image"
+                      />
+                      <div className="memorize-limited-display-name">
+                        {memorizationContent.items[currentItemIndex].name}
+                      </div>
+                    </>
+                  )}
               </div>
             ) : (
               <div className="memorize-limited-dragdrop-content">

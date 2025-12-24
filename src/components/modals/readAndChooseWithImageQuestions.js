@@ -83,6 +83,6 @@ export const readAndChooseWithImageQuestions = {
       "Các bạn nghĩ đâu không phải là hình ảnh của Đà Lạt (Thuộc tỉnh Lâm Đồng)?",
     imageChoices: [lamDongA, lamDongB, lamDongC, lamDongD],
     choiceLabels: ["A", "B", "C", "D"],
-    correctIndex: 2, // Choice D (Nha Trang/Khánh Hòa) is NOT Da Lat ✅
+    correctIndex: 3, // Choice D (Nha Trang/Khánh Hòa) is NOT Da Lat ✅
   },
 };
